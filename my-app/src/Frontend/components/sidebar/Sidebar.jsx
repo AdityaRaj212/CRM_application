@@ -14,6 +14,7 @@ import CalendarMonthOutlinedIcon from "@mui/icons-material/CalendarMonthOutlined
 import "./sidebar.scss";
 import { Link } from "react-router-dom";
 
+
 const Sidebar = () => {
   return (
     <div className="sidebar">
@@ -28,10 +29,19 @@ const Sidebar = () => {
           <p className="title">MAIN</p>
           <li>
             <DashboardIcon className="icon" />
+          <Link to="/">
             <span>Dashboard</span>
-          </li>
+          </Link>
 
-          <p className="title">LISTS</p>
+          </li>
+          <Link to="/users" style={{ textDecoration: "none" }}>
+            <li>
+              <Person3OutlinedIcon className="icon" />
+              <span>Users</span>
+            </li>
+          </Link>
+
+          {/* <p className="title">LISTS</p>
           <Link to="/users" style={{ textDecoration: "none" }}>
             <li>
               <Person3OutlinedIcon className="icon" />
@@ -49,9 +59,9 @@ const Sidebar = () => {
           <li>
             <CreditCardOutlinedIcon className="icon" />
             <span>Orders</span>
-          </li>
+          </li> */}
 
-          <p className="title">CHARTS</p>
+          {/* <p className="title">CHARTS</p>
           <li>
             <InsertChartOutlinedSharpIcon className="icon" />
             <span>Stats</span>
@@ -59,9 +69,9 @@ const Sidebar = () => {
           <li>
             <NotificationsActiveOutlinedIcon className="icon" />
             <span>Notifications</span>
-          </li>
+          </li> */}
 
-          <p className="title">SERVICE</p>
+          {/* <p className="title">SERVICE</p>
           <li>
             <DnsOutlinedIcon className="icon" />
             <span>System Health</span>
@@ -69,9 +79,9 @@ const Sidebar = () => {
           <li>
             <SettingsOutlinedIcon className="icon" />
             <span>Settings</span>
-          </li>
+          </li> */}
 
-          <p className="title">USER INTERFACE</p>
+          {/* <p className="title">USER INTERFACE</p> */}
           <li>
             <ManageAccountsOutlinedIcon className="icon" />
             <span>Profile</span>

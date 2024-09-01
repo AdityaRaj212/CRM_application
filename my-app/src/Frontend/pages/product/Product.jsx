@@ -2,11 +2,11 @@ import React from "react";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
 import "./product.scss";
-// import Productable from "../../components/productable/Productable";
+import Productable from "../../components/productable/Productable.jsx";
 import { Link } from "react-router-dom";
 
 const Product = () => {
-  return (
+  return ( 
     <div className="product">
       <Sidebar />
       <div className="productContainer">
@@ -21,7 +21,7 @@ const Product = () => {
               <span className="link">Add New </span>
             </Link>
           </div>
-          {/* <Productable /> */}
+          <Productable />
         </div>
       </div>
     </div>

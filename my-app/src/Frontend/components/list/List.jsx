@@ -17,8 +17,8 @@ const rows = [
     date: "285",
     amount: 300,
     close:"5 days",
-    // method: "Cash on Delivery",
-    // status: "Approved",
+ 
+    status: "Approved",
   },
   {
     id: 6617772543119,
@@ -29,7 +29,7 @@ const rows = [
     amount: 100,
     close:"7 days",
     // method: "Online Payment",
-    // status: "Pending",
+    status: "Pending",
   },
   {
     id: 200116351133,
@@ -40,7 +40,7 @@ const rows = [
     amount: 200,
     close:"8 days",
     // method: "Online Payment",
-    // status: "Approved",
+    status: "Approved",
   },
   {
     id: 22567721541,
@@ -51,7 +51,7 @@ const rows = [
     amount: 160,
     close:"4 days",
     // method: "Cash on Delivery",
-    // status: "Pending",
+    status: "Pending",
   },
   {
     id: 2117383933399,
@@ -62,7 +62,7 @@ const rows = [
     amount: 570,
     close:"10 days",
     // method: "Online Payment",
-    // status: "Approved",
+    status: "Approved",
   },
   {
     id: 4520015619,
@@ -73,7 +73,7 @@ const rows = [
     amount: 1800,
     close:"15 days",
     // method: "Cash on Delivery",
-    // status: "Approved",
+    status: "Approved",
   },
   {
     id: 25566001527,
@@ -84,7 +84,7 @@ const rows = [
     amount: 20,
     close:"11 days",
     // method: "Cash on Delivery",
-    // status: "Pending",
+    status: "Pending",
   },
   {
     id: 2117383933399,
@@ -95,7 +95,7 @@ const rows = [
     amount: 25,
     close:"2 days",
     // method: "Cash on Delivery",
-    // status: "Approved",
+    status: "Approved",
   },
   {
     id: 2117383933399,
@@ -106,7 +106,7 @@ const rows = [
     amount: 270,
     close:"12 days",
     // method: "Cash on Delivery",
-    // status: "Approved",
+    status: "Approved",
   },
   {
     id: 6117383933399,
@@ -117,7 +117,7 @@ const rows = [
     amount: 300,
     close:"16 days",
     // method: "Cash on Delivery",
-    // status: "Approved",
+    status: "Approved",
   },
   {
     id: 8617772543119,
@@ -128,7 +128,7 @@ const rows = [
     amount: 100,
     close:"5 days",
     // method: "Online Payment",
-    // status: "Pending",
+    status: "Pending",
   },
   {
     id: 200116351133,
@@ -139,7 +139,7 @@ const rows = [
     amount: 200,
     close:"8 days",
     // method: "Online Payment",
-    // status: "Approved",
+    status: "Approved",
   },
   {
     id: 28567721541,
@@ -150,7 +150,7 @@ const rows = [
     amount: 160,
     close:"5 days",
     // method: "Cash on Delivery",
-    // status: "Pending",
+    status: "Pending",
   },
   {
     id: 2517383933399,
@@ -161,7 +161,7 @@ const rows = [
     amount: 570,
     close:"6 days",
     // method: "Online Payment",
-    // status: "Approved",
+    status: "Approved",
   },
   {
     id: 48820015619,
@@ -172,7 +172,7 @@ const rows = [
     amount: 1800,
     close:"3 days",
     // method: "Cash on Delivery",
-    // status: "Approved",
+    status: "Approved",
   },
   {
     id: 2557766001527,
@@ -183,7 +183,7 @@ const rows = [
     amount: 20,
     close:"20 days",
     // method: "Cash on Delivery",
-    // status: "Pending",
+    status: "Pending",
   },
   {
     id: 21047383933399,
@@ -194,7 +194,7 @@ const rows = [
     amount: 25,
     close:"5 days",
     // method: "Cash on Delivery",
-    // status: "Approved",
+    status: "Approved",
   },
   {
     id: 21987383933399,
@@ -205,7 +205,7 @@ const rows = [
     amount: 270,
     close:"4 days",
     // method: "Cash on Delivery",
-    // status: "Approved",
+    status: "Approved",
   },
 ];
 
@@ -222,8 +222,9 @@ const List = () => {
               <TableCell className="tableCell"> Number of responses </TableCell>
               <TableCell className="tableCell">Employees hired</TableCell>
               <TableCell className="tableCell"> Vacancy Closing </TableCell>
-              {/* <TableCell className="tableCell">Payment Method</TableCell>
-              <TableCell className="tableCell">Status</TableCell> */}
+              <TableCell className="tableCell">Status</TableCell>
+              {/* <TableCell className="tableCell">Payment Method</TableCell> */}
+
             </TableRow>
           </TableHead>
           <TableBody>
@@ -240,7 +241,7 @@ const List = () => {
                 <TableCell className="tableCell">{row.date}</TableCell>
                 <TableCell className="tableCell">{row.amount}</TableCell>
                 <TableCell className="tableCell">{row.close}</TableCell>
-                <TableCell className="tableCell">{row.method}</TableCell>
+                {/* <TableCell className="tableCell">{row.method}</TableCell> */}
                 <TableCell className="tableCell">
                   <span className={`status ${row.status}`}>{row.status}</span>
                 </TableCell>

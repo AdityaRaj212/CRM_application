@@ -7,10 +7,10 @@ import ChatBubbleOutlineOutlinedIcon from "@mui/icons-material/ChatBubbleOutline
 import ListOutlinedIcon from "@mui/icons-material/ListOutlined";
 import Switch from "@mui/material/Switch";
 import "./navbar.scss";
-// import { DarkModeContext } from "../../context/darkModeContext";
+import { DarkModeContext } from "../../context/darkModeContext";
 
 const Navbar = () => {
-//   const { dispatch } = useContext(DarkModeContext);
+  const { dispatch } = useContext(DarkModeContext);
   return (
     <div className="navbar">
       <div className="navbarContainer">
@@ -27,7 +27,7 @@ const Navbar = () => {
             <Switch
               style={{ color: "#210876" }}
               className="icon"
-               
+              onClick={() => dispatch({ type: "TOGGLE" })}
             />
           </div>
           <div className="item">

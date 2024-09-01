@@ -1,8 +1,8 @@
 import React from "react";
-import Sidebar from "../../components/sidebar/Sidebar";
-import Navbar from "../../components/navbar/Navbar";
+import Sidebar from "../../../../../admin/src/components/sidebar/Sidebar.jsx";
+import Navbar from "../../../../../admin/src/components/navbar/Navbar.jsx";
 import "./product.scss";
-import Productable from "../../components/productable/Productable.jsx";
+import Productable from "../../../../../admin/src/components/productable/Productable.jsx";
 import { Link } from "react-router-dom";
 
 const Product = () => {

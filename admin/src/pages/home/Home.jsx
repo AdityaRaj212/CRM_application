@@ -1,10 +1,10 @@
 import React from "react";
-import Chart from "../../components/chart/Chart";
-import Featured from "../../components/featured/Featured";
-import List from "../../components/list/List";
-import Navbar from "../../components/navbar/Navbar";
-import Sidebar from "../../components/sidebar/Sidebar";
-import Widget from "../../components/widget/Widget";
+import Chart from "../../../../../admin/src/components/chart/Chart";
+import Featured from "../../../../../admin/src/components/featured/Featured";
+import List from "../../../../../admin/src/components/list/List";
+import Navbar from "../../../../../admin/src/components/navbar/Navbar";
+import Sidebar from "../../../../../admin/src/components/sidebar/Sidebar";
+import Widget from "../../../../../admin/src/components/widget/Widget";
 import "./home.scss";
 
 
