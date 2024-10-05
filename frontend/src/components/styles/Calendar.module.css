@@ -1,0 +1,89 @@
+.calendar {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  /* width: 100%; */
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.navButton {
+  background-color: transparent;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #6772e5;
+}
+
+.navButton:hover {
+  color: #5661cc;
+}
+
+.currentMonth {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  font-size: 14px;
+  color: #888;
+  margin-bottom: 10px;
+}
+
+.dateGrid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-auto-rows: 60px;
+}
+
+.day {
+  /* aspect-ratio: 1/1;  */
+  background-color: #f8f9fc;
+  border: none;
+  padding: 0.5rem;
+  margin: 1rem;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  color: #333;
+}
+
+.day:hover {
+  background-color: #eaeefb;
+}
+
+.attended {
+  background-color: #6772e5;
+  color: white;
+}
+
+.today {
+  border: 2px solid #6772e5;
+  color: #6772e5;
+}
+
+.attendanceButton {
+  background-color: #6772e5;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+.attendanceButton:hover {
+  background-color: #5661cc;
+}

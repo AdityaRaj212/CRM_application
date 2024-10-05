@@ -1,0 +1,122 @@
+.dashboard {
+  display: flex;
+  background-color: white;
+  /* background-color: #f8f9fc; */
+}
+
+.sidebar {
+  width: 250px;
+  background-color: #ffffff;
+  padding: 20px;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  border-right: 1px solid #e5e5e5;
+}
+
+.sidebar ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.sidebar ul li {
+  padding: 15px 0;
+  font-size: 16px;
+  color: #6772e5;
+  cursor: pointer;
+}
+
+.sidebar ul li:hover {
+  background-color: #f1f1f1;
+  padding-left: 5px;
+  transition: 0.3s;
+}
+
+.content {
+  margin-left: 17rem;
+  padding: 20px;
+  width: 100%;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.thought {
+  background-color: rgb(246, 246, 246);
+  padding: 1rem;
+  border-radius: 10px;
+  font-size: 16px;
+  color: #333;
+  font-weight: 600;
+  box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.1), 
+              -3px -3px 8px rgba(255, 255, 255, 0.8); /* 3D shadow effect */
+}
+
+
+.mainSection {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-top: 20px;
+}
+
+.calendarSection {
+  width: 60%;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.rightSection {
+  width: 35%;
+}
+
+.upcomingDeadlines {
+  margin-top: 20px;
+  background-color: #f8f9fc;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.upcomingDeadlines h4 {
+  font-size: 16px;
+  color: #6772e5;
+  font-weight: 600;
+}
+
+.upcomingDeadlines ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.upcomingDeadlines ul li {
+  font-size: 14px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.tasks {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+}
+
+.taskSection {
+  width: 30%;
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.taskSection h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #6772e5;
+}
