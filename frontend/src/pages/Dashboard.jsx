@@ -8,10 +8,25 @@ import TaskSection from '../components/TaskSection';
 import GreetingHeader from '../components/GreetingHeader';
 import Sidebar from '../components/Sidebar';
 
+const thoughtsList = [
+  "Success is the sum of small efforts, repeated day in and day out. - Robert Collier",
+  "Your limitation—it's only your imagination.",
+  "Push yourself, because no one else is going to do it for you.",
+  "Great things never come from comfort zones.",
+  "Dream it. Wish it. Do it.",
+  "Success doesn’t just find you. You have to go out and get it.",
+  "The harder you work for something, the greater you’ll feel when you achieve it.",
+  "Dream bigger. Do bigger.",
+  "Don’t stop when you’re tired. Stop when you’re done.",
+  "Wake up with determination. Go to bed with satisfaction."
+];
+
 const Dashboard = () => {
   const [userName, setUserName] = useState('User');
+  const [joiningDate, setJoiningDate] = useState(null);
   const [userId, setUserId] = useState(null); // Set to null initially
   const [loading, setLoading] = useState(true); // Add a loading state
+  const [thought, setThought] = useState(''); // State for dynamic thought
 
   // Fetch user details once the component is mounted
   useEffect(() => {
@@ -23,6 +38,7 @@ const Dashboard = () => {
           const user = userResponse.data.user;
           setUserName(user.name);
           setUserId(user._id);
+          setJoiningDate(user.joiningDate);
         }
       } catch (err) {
         console.error('Error while fetching user details:', err);
@@ -30,7 +46,18 @@ const Dashboard = () => {
         setLoading(false); // Once the fetch is complete, set loading to false
       }
     };
+    
     fetchDetails();
+    
+    // Set a random thought on component mount
+    setThought(thoughtsList[Math.floor(Math.random() * thoughtsList.length)]);
+
+    // Update thought every hour
+    const intervalId = setInterval(() => {
+      setThought(thoughtsList[Math.floor(Math.random() * thoughtsList.length)]);
+    }, 3600000); // 3600000 milliseconds = 1 hour
+
+    return () => clearInterval(intervalId); // Clean up the interval on component unmount
   }, []);
 
   // Show loading spinner or placeholder while userId is being fetched
@@ -46,13 +73,13 @@ const Dashboard = () => {
         <header className={styles.header}>
           <GreetingHeader username={userName} />
           <h3 className={styles.thought}>
-            "Success is the sum of small efforts, repeated day in and day out." - Robert Collier
+            {thought} {/* Display the dynamic thought */}
           </h3>
         </header>
 
         <div className={styles.mainSection}>
           <div className={styles.calendarSection}>
-            <Calendar userId={userId}/> {/* Calendar doesn't depend on userId */}
+            {joiningDate && <Calendar userId={userId} joiningDate={joiningDate} />}
           </div>
           <div className={styles.rightSection}>
             <ProgressBar /> {/* Progress bar doesn't depend on userId */}

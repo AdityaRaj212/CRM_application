@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import styles from './styles/Calendar.module.css';
-import { format, addMonths, subMonths, startOfMonth, getDay, endOfMonth, isSameDay, isToday } from 'date-fns';
+import { format, addMonths, subMonths, startOfMonth, getDay, endOfMonth, isSameDay, isWeekend, eachDayOfInterval } from 'date-fns';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 
-const Calendar = ({ userId }) => {
+const Calendar = ({ userId, joiningDate }) => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [attendance, setAttendance] = useState([]);
 
@@ -43,7 +43,7 @@ const Calendar = ({ userId }) => {
         const response = await axios.get(`/api/attendance/${userId}`);
         setAttendance(response.data.attendedDates);
       } catch (err) {
-        console.log(err);
+        console.error(err);
       }
     };
 
@@ -53,10 +53,17 @@ const Calendar = ({ userId }) => {
   const renderDays = () => {
     const start = startOfMonth(selectedDate);
     const end = endOfMonth(selectedDate);
-    const startDay = getDay(start); // Determines the day of the week (0: Sunday, 1: Monday, ..., 6: Saturday)
+    const startDay = getDay(start);
 
     const daysInMonth = end.getDate();
     const daysArray = [];
+
+    // Calculate all days from joining date to today
+    const today = new Date();
+    const daysSinceJoining = eachDayOfInterval({
+      start: new Date(joiningDate),
+      end: today,
+    });
 
     // Padding for the days before the 1st of the month
     for (let i = 0; i < startDay; i++) {
@@ -68,19 +75,18 @@ const Calendar = ({ userId }) => {
       const formattedDay = format(day, 'yyyy-MM-dd');
       const isAttended = attendance.includes(formattedDay);
       const isToday = isSameDay(day, new Date());
+      const isJoiningDayOrAfter = daysSinceJoining.some(joiningDay => isSameDay(joiningDay, day));
 
-      // Add classes for visual differentiation
-      let dayClass = styles.day;
+      // Determine the class for the day based on attendance and joining date
+      let dayClass = styles.default; // Default class
       if (isAttended) {
-        dayClass += ` ${styles.attended}`; // Class for attended days
-      } else if (!isAttended && isToday) {
-        dayClass += ` ${styles.today}`; // Class for today
-      } else {
-        dayClass += ` ${styles.default}`; // Class for default days
+        dayClass = styles.attended; // Mark as attended
+      } else if (isJoiningDayOrAfter && !isAttended && !isWeekend(day)) {
+        dayClass = styles.absent; // Mark as absent (non-weekend days)
       }
 
       daysArray.push(
-        <div key={i} className={dayClass}>
+        <div key={i} className={`${styles.day} ${dayClass}`}>
           {i}
         </div>
       );
@@ -91,7 +97,7 @@ const Calendar = ({ userId }) => {
 
   return (
     <div className={styles.calendar}>
-      <ToastContainer /> {/* Toast container for notifications */}
+      <ToastContainer/>
       <div className={styles.header}>
         <button className={styles.navButton} onClick={handlePrevMonth}>&lt;</button>
         <div className={styles.currentMonth}>
@@ -109,7 +115,7 @@ const Calendar = ({ userId }) => {
       </div>
 
       {/* Mark Attendance Button */}
-      <button className={styles.attendanceButton} onClick={markAttendance}>
+      <button onClick={markAttendance} className={styles.attendanceButton}>
         Mark Attendance for Today
       </button>
     </div>

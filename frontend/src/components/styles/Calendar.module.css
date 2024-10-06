@@ -124,6 +124,10 @@
   color: white;
 }
 
+.absent {
+  background-color: red; /* Color for absent days */
+}
+
 .today {
   background-color: lightblue; /* Blue for today */
   color: black;

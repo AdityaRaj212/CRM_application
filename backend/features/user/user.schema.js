@@ -5,6 +5,10 @@ const UserSchema = new mongoose.Schema({
     name: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     password: { type: String },
+    joiningDate: {
+        type: Date,
+        default: Date.now
+      },
     role: { type: String, enum: ['User', 'Admin'], default: 'User' },
     oauthProvider: { type: String, enum: ['google', 'local'], default: 'local' },
     oauthId: { type: String }, // This will store Google OAuth user ID

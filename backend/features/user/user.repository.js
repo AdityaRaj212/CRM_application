@@ -18,6 +18,7 @@ export default class UserRepository {
                 name,
                 email,
                 password,
+                joiningDate: new Date(),
                 profileImg,
                 oauthProvider,
                 oauthId
