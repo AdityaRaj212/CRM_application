@@ -87,3 +87,63 @@
 .attendanceButton:hover {
   background-color: #5661cc;
 }
+
+.calendar {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.days {
+  display: flex;
+  justify-content: space-between;
+}
+
+.day {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.attended {
+  background-color: green; /* Green for present */
+  color: white;
+}
+
+.today {
+  background-color: lightblue; /* Blue for today */
+  color: black;
+}
+
+.default {
+  background-color: lightgray; /* Default color */
+  color: black;
+}
+
+.attendanceButton {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: blue;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.attendanceButton:hover {
+  background-color: darkblue;
+}

@@ -11,6 +11,7 @@ import taskRouter from './features/task/task.router.js';
 import userRouter from './features/user/user.router.js';
 import projectRouter from './features/project/project.router.js';
 import messageRouter from './features/message/message.router.js';
+import attendanceRouter from './features/attendance/attendance.router.js';
 import { connectUsingMongoose } from './config/mongoose.js';
 import { authMiddleware } from './middlewares/auth.middleware.js';
 
@@ -35,6 +36,7 @@ app.use('/api/tasks', taskRouter);
 app.use('/api/users', userRouter);
 app.use('/api/projects', authMiddleware, projectRouter);
 app.use('/api/messages', authMiddleware, messageRouter);
+app.use('/api/attendance', attendanceRouter);
 
 // Start Server
 const PORT = process.env.PORT || 5000;

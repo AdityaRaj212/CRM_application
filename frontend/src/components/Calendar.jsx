@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import styles from './styles/Calendar.module.css';
-import { format, addMonths, subMonths, startOfMonth, getDay, endOfMonth, isSameDay } from 'date-fns';
+import { format, addMonths, subMonths, startOfMonth, getDay, endOfMonth, isSameDay, isToday } from 'date-fns';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 
-const Calendar = () => {
+const Calendar = ({ userId }) => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [attendance, setAttendance] = useState([]);
 
@@ -16,23 +18,37 @@ const Calendar = () => {
     setSelectedDate(subMonths(selectedDate, 1));
   };
 
-  // Function to mark attendance for the selected date
-  const markAttendance = (date) => {
-    axios.post('/api/attendance', { userId: '123', date })
-      .then(() => {
-        setAttendance([...attendance, date]);
-      })
-      .catch(err => console.log(err));
+  // Function to mark attendance for the current date
+  const markAttendance = async () => {
+    const today = format(new Date(), 'yyyy-MM-dd'); // Get today's date
+    if (!attendance.includes(today)) { // Only mark if not already attended
+      try {
+        const response = await axios.post('/api/attendance/', { userId, date: today });
+        setAttendance((prev) => [...prev, response.data.date]); // Update attendance with the new date
+        toast.success('Attendance marked successfully');
+      } catch (err) {
+        toast.error('Unable to mark attendance. Please try again later');
+        console.log(err);
+      }
+    } else {
+      // alert("Attendance for today is already marked.");
+      toast.warning("Attendance for today is already marked.");
+    }
   };
 
   // Fetch attendance on component mount
   useEffect(() => {
-    axios.get('/api/attendance/123')
-      .then(response => {
+    const fetchAttendance = async () => {
+      try {
+        const response = await axios.get(`/api/attendance/${userId}`);
         setAttendance(response.data.attendedDates);
-      })
-      .catch(err => console.log(err));
-  }, []);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    fetchAttendance();
+  }, [userId]);
 
   const renderDays = () => {
     const start = startOfMonth(selectedDate);
@@ -40,9 +56,8 @@ const Calendar = () => {
     const startDay = getDay(start); // Determines the day of the week (0: Sunday, 1: Monday, ..., 6: Saturday)
 
     const daysInMonth = end.getDate();
-
     const daysArray = [];
-    
+
     // Padding for the days before the 1st of the month
     for (let i = 0; i < startDay; i++) {
       daysArray.push(<div key={`pad-${i}`} className={styles.emptyDay}></div>);
@@ -54,14 +69,20 @@ const Calendar = () => {
       const isAttended = attendance.includes(formattedDay);
       const isToday = isSameDay(day, new Date());
 
+      // Add classes for visual differentiation
+      let dayClass = styles.day;
+      if (isAttended) {
+        dayClass += ` ${styles.attended}`; // Class for attended days
+      } else if (!isAttended && isToday) {
+        dayClass += ` ${styles.today}`; // Class for today
+      } else {
+        dayClass += ` ${styles.default}`; // Class for default days
+      }
+
       daysArray.push(
-        <button
-          key={i}
-          className={`${styles.day} ${isAttended ? styles.attended : ''} ${isToday ? styles.today : ''}`}
-          onClick={() => markAttendance(formattedDay)}
-        >
+        <div key={i} className={dayClass}>
           {i}
-        </button>
+        </div>
       );
     }
 
@@ -70,6 +91,7 @@ const Calendar = () => {
 
   return (
     <div className={styles.calendar}>
+      <ToastContainer /> {/* Toast container for notifications */}
       <div className={styles.header}>
         <button className={styles.navButton} onClick={handlePrevMonth}>&lt;</button>
         <div className={styles.currentMonth}>
@@ -86,8 +108,9 @@ const Calendar = () => {
         {renderDays()}
       </div>
 
-      <button className={styles.attendanceButton}>
-        Mark Your Attendance
+      {/* Mark Attendance Button */}
+      <button className={styles.attendanceButton} onClick={markAttendance}>
+        Mark Attendance for Today
       </button>
     </div>
   );

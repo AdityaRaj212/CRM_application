@@ -52,7 +52,7 @@ const Dashboard = () => {
 
         <div className={styles.mainSection}>
           <div className={styles.calendarSection}>
-            <Calendar /> {/* Calendar doesn't depend on userId */}
+            <Calendar userId={userId}/> {/* Calendar doesn't depend on userId */}
           </div>
           <div className={styles.rightSection}>
             <ProgressBar /> {/* Progress bar doesn't depend on userId */}

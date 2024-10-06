@@ -176,6 +176,10 @@ const TaskSection = ({ userId }) => {
   };
 
   const toggleCheckpoint = async (index) => {
+    if (!isEditMode){
+      toast.info('Enable Edit mode to toggle checkpoint status');
+      return;
+    }
     const updatedCheckpoints = [...selectedTask.checkpoints];
     updatedCheckpoints[index].completed = !updatedCheckpoints[index].completed;
 
