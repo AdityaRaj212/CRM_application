@@ -27,13 +27,13 @@ export default class UserController {
     // Local Signup
     async signup(req, res) {
         try {
-            const { name, email, password, profileImg } = req.body;
+            const { firstName, lastName, email, mobileNo, position, userName, password } = req.body;
             const existingUser = await this.userRepository.findByEmail(email);
             if (existingUser) {
                 return res.status(400).json({ message: "User already exists" });
             }
 
-            const newUser = await this.userRepository.addUser(name, email, password, profileImg);
+            const newUser = await this.userRepository.addUser(firstName, lastName, email, mobileNo, position, userName, password);
             return res.status(201).json({ status: true, user: newUser });
         } catch (err) {
             console.error('Error while signing up: ', err);
@@ -97,6 +97,42 @@ export default class UserController {
             console.error('Error while fetching user by Id: ', err);
             return res.status(500).json({
                 message: 'Error fetching user by id',
+                error: err.message
+            })
+        }
+    }
+
+    async updateUser(req, res){
+        try {
+            const { userId } = req.params;
+            const updateData = req.body;
+    
+            const updatedUser = await this.userRepository.updateUser(userId, updateData);
+            res.status(200).json({
+                status: true,
+                user: updatedUser
+            });
+        } catch (err) {
+            console.error('Error while updating user: ', err);
+            return res.status(500).json({
+                message: 'Error while updating user',
+                error: err.message
+            });
+        }
+    }
+
+    async deleteUser(req, res){
+        try{
+            const {userId} = req.params;
+            const user = await this.userRepository.deleteUser(userId);
+            res.status(201).json({
+                status: true,
+                user
+            })
+        }catch(err){
+            console.error('Error while deleting user: ', err);
+            return res.status(500).json({
+                message: 'Error while deleting user',
                 error: err.message
             })
         }

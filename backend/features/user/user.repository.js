@@ -12,14 +12,17 @@ export default class UserRepository {
         }
     }
 
-    async addUser(name, email, password, profileImg, oauthProvider = 'local', oauthId = null) {
+    async addUser(firstName, lastName, email, mobileNo, position, userName, password, oauthProvider = 'local', oauthId = null) {
         try {
             const newUser = new UserModel({
-                name,
+                firstName,
+                lastName,
                 email,
+                mobileNo,
+                position,
+                userName,
                 password,
                 joiningDate: new Date(),
-                profileImg,
                 oauthProvider,
                 oauthId
             });
@@ -57,6 +60,16 @@ export default class UserRepository {
             return user;
         }catch(err){
             console.log('Error while fetching user with id: ', err);
+            throw new Error(err);
+        }
+    }
+
+    async findUserByEmpId(empId){
+        try{
+            const user = await UserModel.find({empId});
+            return user;
+        }catch(err){
+            console.log('Error while fetching user with empId: ', err);
             throw new Error(err);
         }
     }

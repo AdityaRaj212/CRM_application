@@ -1,9 +1,14 @@
 import mongoose from "mongoose";
 import bcrypt from "bcryptjs"; // For password hashing
+import { v4 as uuidv4 } from 'uuid';
 
 const UserSchema = new mongoose.Schema({
-    name: { type: String, required: true },
+    empId: {type: String, unique: true},
+    firstName: { type: String, required: true },
+    lastName: { type: String, required: true },
+    userName: {type: String, unique: true},
     email: { type: String, required: true, unique: true },
+    mobileNo: {type: String, required: true},
     password: { type: String },
     joiningDate: {
         type: Date,
@@ -22,6 +27,14 @@ UserSchema.pre('save', async function (next) {
     if (!this.isModified('password')) return next();
     const salt = await bcrypt.genSalt(10);
     this.password = await bcrypt.hash(this.password, salt);
+
+    this.firstName = this.firstName.trim();
+    this.lastName = this.lastName.trim();
+
+    if (!this.empId) {
+        this.empId = uuidv4(); // Generate a unique ID
+    }
+
     next();
 });
 
