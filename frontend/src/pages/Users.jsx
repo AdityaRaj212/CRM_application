@@ -6,12 +6,12 @@ import UserList from '../components/UserList';
 import AddUserModal from '../components/AddUserModal';
 import SortDropdown from '../components/SortDropdown';
 import FilterDropdown from '../components/FilterDropdown';
-import styles from './styles/AdminDashboard.module.css';
+import styles from './styles/Users.module.css';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
 
-const AdminDashboard = () => {
+const Users = () => {
   const [user, setUser] = useState('');
   const [users, setUsers] = useState([]);
   const [userName, setUserName] = useState('User');
@@ -24,46 +24,30 @@ const AdminDashboard = () => {
   const [usersPerPage] = useState(5); // Number of users per page
   const [sortOption, setSortOption] = useState('name');
   const [filteredUsers, setFilteredUsers] = useState([]); // State for filtered users
+  const [loremNumbers, setLoremNumbers] = useState([614, 124, 504, 100]);
 
-    // Fetch user details once the component is mounted
-    useEffect(() => {
-      const fetchDetails = async () => {
-        try {
-          const storedUserId = localStorage.getItem('userId');
-          if (storedUserId) {
-            const userResponse = await axios.get(`/api/users/get-user-by-id/${storedUserId}`);
-            setUser(userResponse.data.user);
-            setUserName(userResponse.data.user.firstName);
-          }
-
-          const response = await axios.get('/api/users'); // Adjust this endpoint
-          setUsers(response.data.users); // Set users from API response
-          setFilteredUsers(response.data.users); // Initialize filtered users
-        } catch (err) {
-          console.error('Error while fetching user details:', err);
-        } finally {
-          setLoading(false); // Once the fetch is complete, set loading to false
+  useEffect(() => {
+    const fetchDetails = async () => {
+      try {
+        const storedUserId = localStorage.getItem('userId');
+        if (storedUserId) {
+          const userResponse = await axios.get(`/api/users/get-user-by-id/${storedUserId}`);
+          setUser(userResponse.data.user);
+          setUserName(userResponse.data.user.firstName);
         }
-      };
-      
-      fetchDetails();
-    },[]);
 
-  // useEffect(() => {
-  //   const fetchUsers = async () => {
-  //     try {
-  //       const response = await axios.get('/api/users'); // Adjust this endpoint
-  //       setUsers(response.data.users); // Set users from API response
-  //       setFilteredUsers(response.data.users); // Initialize filtered users
-  //     } catch (error) {
-  //       console.error('Error fetching users:', error);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
-
-  //   fetchUsers();
-  // }, []);
+        const response = await axios.get('/api/users'); // Adjust this endpoint
+        setUsers(response.data.users); // Set users from API response
+        setFilteredUsers(response.data.users); // Initialize filtered users
+      } catch (err) {
+        console.error('Error while fetching user details:', err);
+      } finally {
+        setLoading(false); // Once the fetch is complete, set loading to false
+      }
+    };
+    
+    fetchDetails();
+  },[]);
 
    // Function to handle sorting
    const handleSortChange = (option) => {
@@ -186,6 +170,18 @@ const AdminDashboard = () => {
                 selectedPosition={positionFilter} 
               />
             </div>
+            <div className={styles.loremSection}>
+              {loremNumbers.map((number, index) => (
+                <div className={styles.loremItem} key={index}>
+                  <div className={styles.text}>
+                   Lorem ipsum
+                  </div>
+                  <div className={styles.number}>
+                   {number}
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
           <UserList users={currentUsers} onDeleteUser={handleDeleteUser} />
           <div className={styles.pagination}>
@@ -208,4 +204,4 @@ const AdminDashboard = () => {
   );
 };
 
-export default AdminDashboard;
+export default Users;

@@ -1,18 +1,45 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styles from './styles/Sidebar.module.css';
 
 const Sidebar = () => {
+  const navigate = useNavigate();
+  const [activeMenu, setActiveMenu] = useState('dashboard'); // State for active menu
+
+  const handleMenuClick = (menu) => {
+    setActiveMenu(menu); // Set the active menu
+    switch(menu){
+      case 'dashboard':
+        navigate('/admin');
+        break;
+      
+      case 'users':
+        navigate('/users');
+        break;
+
+      default:
+        navigate('/');
+    }
+    // navigate(menu === 'dashboard' ? '/admin' : '/users'); // Navigate based on menu
+  };
+
   return (
     <div className={styles.sidebar}>
       <div className={styles.brand}>
         <h2>Prajnan</h2>
       </div>
       <ul className={styles.menuList}>
-        <li className={`${styles.menuItem} ${styles.active}`}>
+        <li 
+          className={`${styles.menuItem} ${activeMenu === 'dashboard' ? styles.active : ''}`} 
+          onClick={() => handleMenuClick('dashboard')}
+        >
           <span className={styles.icon}>⌘</span>
           <span className={styles.text}>Dashboard</span>
         </li>
-        <li className={styles.menuItem}>
+        <li 
+          className={`${styles.menuItem} ${activeMenu === 'users' ? styles.active : ''}`} 
+          onClick={() => handleMenuClick('users')}
+        >
           <span className={styles.icon}>📊</span>
           <span className={styles.text}>Users</span>
         </li>

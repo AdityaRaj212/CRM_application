@@ -1,0 +1,160 @@
+/* AdminDashboard.module.css */
+.dashboard {
+    display: flex;
+    background-color: #F5F5F5;
+    min-height: 100vh;
+  }
+  
+  .content {
+    margin-left: 15rem; /* Adjust this based on your sidebar width */
+    padding: 1rem 1rem 1rem 2.5rem;
+    flex: 1;
+  }
+  
+  .header {
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .sectionTitle {
+    color: #4985F6;
+  }
+  
+  .mainSection {
+    margin-top: 2rem;
+  }
+  
+  
+  /* Enhanced styles for quick actions */
+  .quickActions {
+    display: flex;
+    align-items: center; /* Center items vertically */
+    justify-content: space-between;
+    margin: 1rem 0; /* Add margin for spacing */
+    padding: 1rem; /* Add padding for better spacing */
+    background-color: #ffffff; /* White background for contrast */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  }
+  
+  /* Styles for the search input */
+  .quickActions input {
+    width: 40%; /* Adjust width */
+    padding: 0.5rem 1rem; /* Padding for comfortable input */
+    border: 1px solid #ddd; /* Light border */
+    border-radius: 5px; /* Rounded corners */
+    outline: none; /* Remove default outline */
+    transition: border-color 0.3s; /* Transition for border color change */
+  }
+  
+  /* Change border color on focus */
+  .quickActions input:focus {
+    border-color: #0B94FA; /* Change border color on focus */
+    box-shadow: 0 0 5px rgba(11, 148, 250, 0.5); /* Light shadow for focus effect */
+  }
+  
+  /* Enhanced styles for buttons */
+  .addUserButton {
+    background-color: #0B94FA;
+    color: white;
+    width: 10rem;
+    border: none;
+    padding: 0.5rem 1.5rem; /* More padding for better button size */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s; /* Smooth transition */
+  }
+  
+  /* Button hover effect */
+  .addUserButton:hover {
+    background-color: #0A7DC2; /* Darker shade on hover */
+    transform: translateY(-2px); /* Lift effect on hover */
+  }
+  
+  /* Adjust styles for filter dropdown */
+  .quickActions select {
+    padding: 0.5rem; /* Padding for comfortable selection */
+    border: 1px solid #ddd; /* Light border */
+    border-radius: 5px; /* Rounded corners */
+    margin-left: 1rem; /* Margin for spacing */
+    transition: border-color 0.3s; /* Transition for border color change */
+  }
+  
+  /* Change border color on focus for select */
+  .quickActions select:focus {
+    border-color: #0B94FA; /* Change border color on focus */
+  }
+  
+  /* AdminDashboard.module.css */
+  .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Center the items vertically */
+    margin-top: 20px;
+    gap: 8px; /* Space between buttons */
+  }
+  
+  .pagination button {
+    padding: 8px 12px; /* Adjust padding for a Google-like button */
+    border: 1px solid transparent; /* Make borders consistent */
+    border-radius: 20px; /* Rounded edges */
+    background-color: #f8f9fa; /* Light background color */
+    color: #4285f4; /* Google blue for text */
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease; /* Smooth transition for all properties */
+  }
+  
+  .pagination button:hover {
+    background-color: #e8f0fe; /* Light blue background on hover */
+    border-color: #4285f4; /* Blue border on hover */
+  }
+  
+  .pagination .active {
+    background-color: #4285f4; /* Google blue for active button */
+    color: white; /* White text for contrast */
+    font-weight: bold; /* Bold text for emphasis */
+  }
+  
+  .pagination button:focus {
+    outline: none; /* Remove default focus outline */
+    box-shadow: 0 0 0 4px rgba(66, 133, 244, 0.4); /* Custom focus ring */
+  }
+
+  /* Users.module.css */
+
+/* New styles for the Lorem Ipsum section */
+.loremSection {
+  display: flex;
+  justify-content: space-between; /* Space out the items */
+  margin: 1rem 0; /* Margin for spacing */
+}
+
+.loremItem {
+  background-color: white; /* Light background */
+  padding: 1rem; /* Padding for content */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  flex: 1; /* Make items equal width */
+  margin-right: 1rem; /* Space between items */
+  display: flex;
+  flex-direction: column;
+}
+
+.loremItem .text{
+  color: #888;
+  margin: 0.5rem;
+}
+
+.loremItem .number{
+  font-weight: bold;
+  font-size: 1.5rem;
+  margin: 0.5rem;
+}
+
+/* Remove margin from the last item */
+.loremItem:last-child {
+  margin-right: 0; /* Remove right margin */
+}
+
+  
