@@ -1,0 +1,79 @@
+.container{
+  background-color: white;
+  border-radius: 10px;
+  padding-top: 1rem;
+}
+
+.userTable {
+  width: 100%;
+  border-collapse: collapse; /* Ensures that borders are collapsed */
+}
+
+/* Remove vertical borders by only applying border to the bottom */
+.userTable th, 
+.userTable td {
+  border: none; /* Remove all borders */
+  padding: 1rem;
+  text-align: left;
+}
+
+.userTable td{
+  margin: 0 1rem;
+}
+
+.userTable th {
+  background-color: #EFF4FA;
+  color: #8F9BB3;
+  border-bottom: 2px solid #e5e5e5; /* Add a bottom border for headers */
+}
+
+/* Apply bottom border for rows */
+.userTable tr {
+  border-bottom: 1px solid #e5e5e5; /* Add bottom borders to rows */
+}
+
+.header{
+  font-size: 1.5rem;
+  margin: 1rem;
+}
+
+.user {
+  display: flex;
+  justify-content: space-between;
+}
+
+.userInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.userEmail {
+  color: #888;
+}
+
+.admin {
+  padding: 0.5rem;
+  text-align: center;
+  width: 7rem;
+  border-radius: 10px;
+  background-color: #0B94FA;
+  color: white;
+}
+
+.employee {
+  padding: 0.5rem;
+  text-align: center;
+  width: 7rem;
+  border-radius: 10px;
+  background-color: #EFF4FA;
+  color: #8F9BB3;
+}
+
+.actionBtns {
+  display: flex;
+}
+
+.actionBtns button {
+  background: none;
+  color: #888;
+}

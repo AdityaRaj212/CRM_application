@@ -1,0 +1,166 @@
+/* AddUserModal.module.css */
+
+.modalOverlay {
+  position: fixed; 
+  top: 0; 
+  left: 0; 
+  right: 0; 
+  bottom: 0; 
+  background: rgba(0, 0, 0, 0.5); 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  z-index: 1000; 
+}
+
+.modalContent {
+  background: white; 
+  border-radius: 8px; 
+  padding: 2rem; 
+  width: 70%; 
+  max-width: 90%; 
+  max-height: 80vh; 
+  overflow-y: auto; 
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
+  position: relative; 
+  z-index: 1001; 
+}
+
+th:first-child, td:first-child { /* Align the first column (Module) to the left */
+  text-align: left; 
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+.type1 {
+  width: 100%;
+}
+
+.type2 {
+  width: 45%;
+}
+
+.type3 {
+  width: 30%;
+}
+
+.name {
+  display: flex;
+  justify-content: space-between;
+}
+
+.thirdRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.fourthRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.thirdRow select {
+  border: 1px solid #DDDDDD;
+  color: #757575;
+  border-radius: 10px;
+  height: 3.2rem;
+}
+
+h3 {
+  margin-top: 1rem; 
+}
+
+table {
+  width: 100%; 
+  border-collapse: collapse; 
+  margin-top: 1rem; 
+}
+
+th, td {
+  text-align: center; 
+  padding: 1rem; 
+}
+
+th {
+  background-color: #f0f0f0; 
+  color: #666; 
+}
+
+tr {
+  border-bottom: 1px solid #e5e5e5; 
+}
+
+tr:hover {
+  background-color: #f9f9f9; 
+}
+
+.checkboxLabel {
+  position: relative; 
+  padding-left: 25px; 
+  cursor: pointer; 
+  display: inline-flex; /* Make it inline-flex to align items */
+  align-items: center; /* Center checkbox vertically */
+}
+
+input[type="checkbox"] {
+  position: absolute; 
+  opacity: 0; 
+  cursor: pointer; 
+}
+
+.checkboxLabel:before {
+  content: ''; 
+  position: absolute; 
+  left: 0; 
+  top: 50%; 
+  transform: translateY(-50%); 
+  width: 20px; 
+  height: 20px; 
+  border: 2px solid #0B94FA; 
+  background-color: white; 
+  border-radius: 4px; 
+}
+
+input[type="checkbox"]:checked + .checkboxLabel:before {
+  background-color: #0B94FA; 
+}
+
+input[type="checkbox"]:checked + .checkboxLabel:after {
+  content: '✔'; 
+  color: white; 
+  position: absolute; 
+  left: 4px; 
+  top: 1px; 
+  font-size: 16px; 
+}
+
+/* Attractive scrollbar styles */
+.modalContent::-webkit-scrollbar {
+  width: 8px; /* Width of the scrollbar */
+}
+
+.modalContent::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Track background */
+  border-radius: 10px;
+}
+
+.modalContent::-webkit-scrollbar-thumb {
+  background-color: #0B94FA; /* Scrollbar color */
+  border-radius: 10px; /* Round the scrollbar */
+}
+
+.modalContent::-webkit-scrollbar-thumb:hover {
+  background: #0A7DC2; /* Darker shade on hover */
+}
+
+/* Firefox scrollbar styling */
+.modalContent {
+  scrollbar-width: thin; /* Make scrollbar thin */
+  scrollbar-color: #0B94FA #f1f1f1; /* Thumb and track colors */
+}

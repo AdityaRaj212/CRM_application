@@ -1,0 +1,63 @@
+/* Dashboard.module.css */
+.dashboard {
+    display: flex;
+    background-color: #F5F5F5;
+    min-height: 100vh;
+  }
+  
+  .content {
+    margin-left: 15rem; /* Adjust this based on your sidebar width */
+    padding: 2rem;
+    flex: 1;
+  }
+  
+  .header {
+    /* display: flex; */
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .sectionTitle{
+    color: #4985F6;
+  }
+  
+  .thought {
+    margin-top: 1rem;
+  }
+  
+  .mainSection {
+    margin-top: 2rem;
+  }
+
+  .addUserButton {
+    background-color: #0B94FA;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 1rem;
+    transition: background-color 0.3s;
+  }
+  
+  .addUserButton:hover {
+    background-color: #0A7DC2; /* Darker shade on hover */
+  }  
+
+  .quickActions{
+    display: flex;
+    flex-direction: row; 
+    justify-content: space-between;
+    margin: 0.5rem;
+  }
+
+  .quickActions button{
+    width: 10rem;
+    aspect-ratio: 8/1;
+    background-color: #4985F6;
+  }
+
+  .quickActions input{
+    width: 50%;
+  }
+  

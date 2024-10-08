@@ -86,17 +86,16 @@ const Dashboard = () => {
             <div className={styles.upcomingDeadlines}>
               <h4>Upcoming Deadlines</h4>
               <ul>
-                <li>Project 1 Deadline: 25th May 2022</li>
-                <li>Project 2 Deadline: 1st June 2022</li>
+                <li>Project 1 Deadline: 25th May 2025</li>
+                <li>Project 2 Deadline: 1st June 2025</li>
               </ul>
             </div>
           </div>
         </div>
 
-        {/* Render TaskSection only after userId is fetched */}
         {userId && (
           <div className={styles.tasks}>
-            <TaskSection userId={userId} /> {/* Pass userId to TaskSection */}
+            <TaskSection userId={userId} /> 
           </div>
         )}
       </div>

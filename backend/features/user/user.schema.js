@@ -10,6 +10,7 @@ const UserSchema = new mongoose.Schema({
         default: Date.now
       },
     role: { type: String, enum: ['User', 'Admin'], default: 'User' },
+    position: {type: String, enum: ['Super Admin', 'HR Admin', 'Admin', 'Employee'], default: 'Employee'},
     oauthProvider: { type: String, enum: ['google', 'local'], default: 'local' },
     oauthId: { type: String }, // This will store Google OAuth user ID
     profileImg: { type: String },

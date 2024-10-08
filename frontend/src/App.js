@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Dashboard from './pages/Dashboard';
 import Login from './pages/Login';
 import './App.css';  // Import global styles
+import AdminDashboard from './pages/AdminDashboard';
 
 function App() {
   // const [tasks, setTasks] = useState([]);
@@ -21,6 +22,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Dashboard/>} />
         <Route path='/auth' element = {<Login/>} />
+        <Route path='/admin' element = {<AdminDashboard/>} />
       </Routes>
     </Router>
     // <div className="App">
