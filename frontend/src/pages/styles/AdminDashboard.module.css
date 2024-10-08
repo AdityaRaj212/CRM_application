@@ -84,3 +84,39 @@
 .quickActions select:focus {
   border-color: #0B94FA; /* Change border color on focus */
 }
+
+/* AdminDashboard.module.css */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Center the items vertically */
+  margin-top: 20px;
+  gap: 8px; /* Space between buttons */
+}
+
+.pagination button {
+  padding: 8px 12px; /* Adjust padding for a Google-like button */
+  border: 1px solid transparent; /* Make borders consistent */
+  border-radius: 20px; /* Rounded edges */
+  background-color: #f8f9fa; /* Light background color */
+  color: #4285f4; /* Google blue for text */
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease; /* Smooth transition for all properties */
+}
+
+.pagination button:hover {
+  background-color: #e8f0fe; /* Light blue background on hover */
+  border-color: #4285f4; /* Blue border on hover */
+}
+
+.pagination .active {
+  background-color: #4285f4; /* Google blue for active button */
+  color: white; /* White text for contrast */
+  font-weight: bold; /* Bold text for emphasis */
+}
+
+.pagination button:focus {
+  outline: none; /* Remove default focus outline */
+  box-shadow: 0 0 0 4px rgba(66, 133, 244, 0.4); /* Custom focus ring */
+}

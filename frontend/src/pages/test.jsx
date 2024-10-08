@@ -3,9 +3,9 @@ import axios from 'axios';
 import Sidebar from '../components/Sidebar';
 import GreetingHeader from '../components/GreetingHeader';
 import UserList from '../components/UserList';
-import AddUserModal from '../components/AddUserModal';
+import AddUserModal from '../components/AddUserModal'; // Import the modal component
 import SortDropdown from '../components/SortDropdown';
-import FilterDropdown from '../components/FilterDropdown';
+import FilterDropdown from '../components/FilterDropdown'; // Import the FilterDropdown
 import styles from './styles/AdminDashboard.module.css';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -15,21 +15,17 @@ const AdminDashboard = () => {
   const [users, setUsers] = useState([]);
   const [userName, setUserName] = useState('User');
   const [loading, setLoading] = useState(true);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [currentUser, setCurrentUser] = useState(null);
-  const [searchQuery, setSearchQuery] = useState('');
-  const [positionFilter, setPositionFilter] = useState('');
-  const [currentPage, setCurrentPage] = useState(1); // State for current page
-  const [usersPerPage] = useState(5); // Number of users per page
   const [sortOption, setSortOption] = useState('name');
+  const [isModalOpen, setIsModalOpen] = useState(false); // State for modal visibility
+  const [searchQuery, setSearchQuery] = useState(''); // State for search query
   const [filteredUsers, setFilteredUsers] = useState([]); // State for filtered users
-
+  const [positionFilter, setPositionFilter] = useState(''); // State for position filter
 
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await axios.get('/api/users'); // Adjust this endpoint
-        setUsers(response.data.users); // Set users from API response
+        const response = await axios.get('/api/users'); // Modify the endpoint accordingly
+        setUsers(response.data.users); // Adjust according to your API response structure
         setFilteredUsers(response.data.users); // Initialize filtered users
       } catch (error) {
         console.error('Error fetching users:', error);
@@ -41,8 +37,8 @@ const AdminDashboard = () => {
     fetchUsers();
   }, []);
 
-   // Function to handle sorting
-   const handleSortChange = (option) => {
+  // Function to handle sorting
+  const handleSortChange = (option) => {
     setSortOption(option);
     sortUsers(option);
   };
@@ -64,18 +60,6 @@ const AdminDashboard = () => {
     setFilteredUsers(sortedUsers);
   };
 
-  const results = users.filter(user => 
-    user.firstName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    user.lastName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    user.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    user.position.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    user.role.toLowerCase().includes(searchQuery.toLowerCase())
-  );
-
-  const indexOfLastUser = currentPage * usersPerPage; // Last user index on current page
-  const indexOfFirstUser = indexOfLastUser - usersPerPage; // First user index on current page
-  const currentUsers = filteredUsers.slice(indexOfFirstUser, indexOfLastUser); // Get users for the current page
-
   const handleSearchChange = (e) => {
     const query = e.target.value.toLowerCase();
     setSearchQuery(query);
@@ -89,8 +73,7 @@ const AdminDashboard = () => {
       user.role.toLowerCase().includes(query)
     );
 
-    setFilteredUsers(results);
-    setCurrentPage(1); // Reset to first page on search
+    setFilteredUsers(results); // Set filtered users based on search query
   };
 
   const handlePositionFilterChange = (position) => {
@@ -102,11 +85,9 @@ const AdminDashboard = () => {
     } else {
       setFilteredUsers(users); // Reset to all users if no filter is selected
     }
-    setCurrentPage(1); // Reset to first page on filter change
   };
 
   const openModal = () => {
-    setCurrentUser(null);
     setIsModalOpen(true);
   };
 
@@ -116,24 +97,19 @@ const AdminDashboard = () => {
 
   const handleDeleteUser = async (userId) => {
     try {
-      await axios.delete(`/api/users/${userId}`);
-      toast.success('User deleted successfully');
-      setUsers(users.filter(user => user._id !== userId)); // Remove the user from the local state
+      console.log(userId);
+      await axios.delete(`/api/users/${userId}`); // Make sure the endpoint is correct
+      toast.success('User deleted successfully')
+      setFilteredUsers(filteredUsers.filter(user => user._id !== userId)); // Remove the user from the local state
     } catch (error) {
       console.error('Error deleting user:', error);
       toast.error('Unable to delete user. Something went wrong');
     }
   };
 
-  const handlePageChange = (pageNumber) => {
-    setCurrentPage(pageNumber);
-  };
-
   if (loading) {
     return <div className={styles.loading}>Loading...</div>;
   }
-
-  const totalPages = Math.ceil(filteredUsers.length / usersPerPage); // Calculate total pages
 
   return (
     <div className={styles.dashboard}>
@@ -163,23 +139,12 @@ const AdminDashboard = () => {
               />
             </div>
           </div>
-          <UserList users={currentUsers} onDeleteUser={handleDeleteUser} />
-          <div className={styles.pagination}>
-            {Array.from({ length: totalPages }, (_, index) => (
-              <button 
-                key={index + 1} 
-                onClick={() => handlePageChange(index + 1)} 
-                className={currentPage === index + 1 ? styles.active : ''}>
-                {index + 1}
-              </button>
-            ))}
-          </div>
+          <UserList users={filteredUsers} onDeleteUser={handleDeleteUser} />
         </div>
       </div>
 
       {/* Add User Modal */}
       <AddUserModal isOpen={isModalOpen} onRequestClose={closeModal} />
-      <ToastContainer />
     </div>
   );
 };
