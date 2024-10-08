@@ -36,7 +36,7 @@ const Dashboard = () => {
         if (storedUserId) {
           const userResponse = await axios.get(`/api/users/get-user-by-id/${storedUserId}`);
           const user = userResponse.data.user;
-          setUserName(user.name);
+          setUserName(user.firstName);
           setUserId(user._id);
           setJoiningDate(user.joiningDate);
         }

@@ -14,7 +14,7 @@
 .userTable td {
   border: none; /* Remove all borders */
   padding: 1rem;
-  text-align: left;
+  /* text-align: left; */
 }
 
 .userTable td{

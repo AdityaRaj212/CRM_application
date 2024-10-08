@@ -1,63 +1,86 @@
-/* Dashboard.module.css */
+/* AdminDashboard.module.css */
 .dashboard {
-    display: flex;
-    background-color: #F5F5F5;
-    min-height: 100vh;
-  }
-  
-  .content {
-    margin-left: 15rem; /* Adjust this based on your sidebar width */
-    padding: 2rem;
-    flex: 1;
-  }
-  
-  .header {
-    /* display: flex; */
-    justify-content: space-between;
-    align-items: center;
-  }
+  display: flex;
+  background-color: #F5F5F5;
+  min-height: 100vh;
+}
 
-  .sectionTitle{
-    color: #4985F6;
-  }
-  
-  .thought {
-    margin-top: 1rem;
-  }
-  
-  .mainSection {
-    margin-top: 2rem;
-  }
+.content {
+  margin-left: 15rem; /* Adjust this based on your sidebar width */
+  padding: 1rem 1rem 1rem 2.5rem;
+  flex: 1;
+}
 
-  .addUserButton {
-    background-color: #0B94FA;
-    color: white;
-    border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-bottom: 1rem;
-    transition: background-color 0.3s;
-  }
-  
-  .addUserButton:hover {
-    background-color: #0A7DC2; /* Darker shade on hover */
-  }  
+.header {
+  justify-content: space-between;
+  align-items: center;
+}
 
-  .quickActions{
-    display: flex;
-    flex-direction: row; 
-    justify-content: space-between;
-    margin: 0.5rem;
-  }
+.sectionTitle {
+  color: #4985F6;
+}
 
-  .quickActions button{
-    width: 10rem;
-    aspect-ratio: 8/1;
-    background-color: #4985F6;
-  }
+.mainSection {
+  margin-top: 2rem;
+}
 
-  .quickActions input{
-    width: 50%;
-  }
-  
+
+/* Enhanced styles for quick actions */
+.quickActions {
+  display: flex;
+  align-items: center; /* Center items vertically */
+  justify-content: space-between;
+  margin: 1rem 0; /* Add margin for spacing */
+  padding: 1rem; /* Add padding for better spacing */
+  background-color: #ffffff; /* White background for contrast */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+/* Styles for the search input */
+.quickActions input {
+  width: 40%; /* Adjust width */
+  padding: 0.5rem 1rem; /* Padding for comfortable input */
+  border: 1px solid #ddd; /* Light border */
+  border-radius: 5px; /* Rounded corners */
+  outline: none; /* Remove default outline */
+  transition: border-color 0.3s; /* Transition for border color change */
+}
+
+/* Change border color on focus */
+.quickActions input:focus {
+  border-color: #0B94FA; /* Change border color on focus */
+  box-shadow: 0 0 5px rgba(11, 148, 250, 0.5); /* Light shadow for focus effect */
+}
+
+/* Enhanced styles for buttons */
+.addUserButton {
+  background-color: #0B94FA;
+  color: white;
+  width: 10rem;
+  border: none;
+  padding: 0.5rem 1.5rem; /* More padding for better button size */
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s; /* Smooth transition */
+}
+
+/* Button hover effect */
+.addUserButton:hover {
+  background-color: #0A7DC2; /* Darker shade on hover */
+  transform: translateY(-2px); /* Lift effect on hover */
+}
+
+/* Adjust styles for filter dropdown */
+.quickActions select {
+  padding: 0.5rem; /* Padding for comfortable selection */
+  border: 1px solid #ddd; /* Light border */
+  border-radius: 5px; /* Rounded corners */
+  margin-left: 1rem; /* Margin for spacing */
+  transition: border-color 0.3s; /* Transition for border color change */
+}
+
+/* Change border color on focus for select */
+.quickActions select:focus {
+  border-color: #0B94FA; /* Change border color on focus */
+}

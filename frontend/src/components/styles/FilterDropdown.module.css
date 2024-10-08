@@ -1,0 +1,11 @@
+/* FilterDropdown.module.css */
+
+
+.filterDropdown {
+    margin-left: 10px;
+}
+
+.filterDropdown label{
+  font-weight: bold;
+}
+  
