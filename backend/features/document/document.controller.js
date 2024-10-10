@@ -11,6 +11,7 @@ export default class DocumentController {
                 userId: req.body.userId, // Assuming user is authenticated and user ID is available
                 filename: req.file.originalname,
                 filePath: req.file.path,
+                fileType: req.body.fileType,
                 description: req.body.description // Include description
             };
 
@@ -45,6 +46,7 @@ export default class DocumentController {
         try {
             const updatedData = {
                 filename: req.body.filename || currentDocument.filename,
+                fileType: req.body.fileType || currentDocument.fileType,
                 description: req.body.description || currentDocument.description,
                 // You can add logic to handle the file if provided
             };

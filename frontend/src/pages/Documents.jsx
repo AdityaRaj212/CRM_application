@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Sidebar from '../components/Sidebar';
 import GreetingHeader from '../components/GreetingHeader';
+import SortDropdown from '../components/SortDropdownDocuments';
+import FilterDropdown from '../components/FilterDropdownDocuments';
 import styles from './styles/Documents.module.css';
 import Modal from 'react-modal';
 import { FaRegFileLines } from "react-icons/fa6";
@@ -25,17 +27,18 @@ const Documents = () => {
     const [selectedMonth, setSelectedMonth] = useState('This Month');
     const [selectedFileType, setSelectedFileType] = useState('Documents');
     const [sortOption, setSortOption] = useState('Date');
+    const [searchQuery, setSearchQuery] = useState('');
+    const [filteredDocuments, setFilteredDocuments] = useState([]);
 
     useEffect(() => {
         fetchDocuments();
-    }, [selectedMonth, selectedFileType, sortOption]);
+    }, []);
 
     const fetchDocuments = async () => {
         try {
-            const response = await axios.get('/api/documents', {
-                params: { month: selectedMonth, fileType: selectedFileType, sort: sortOption }
-            });
+            const response = await axios.get('/api/documents');
             setDocuments(response.data);
+            setFilteredDocuments(response.data); // Initialize filtered documents
             const storedUserId = localStorage.getItem('userId');
             if (storedUserId) {
                 const userResponse = await axios.get(`/api/users/get-user-by-id/${storedUserId}`);
@@ -47,6 +50,83 @@ const Documents = () => {
             setLoading(false);
         }
     };
+
+    const handleSortChange = (option) => {
+        setSortOption(option);
+        sortDocuments(option);
+    };
+
+    const sortDocuments = (option) => {
+        const sortedDocs = [...filteredDocuments].sort((a, b) => {
+            if (option === 'filename') {
+                return a.filename.localeCompare(b.filename);
+            } else if (option === 'uploadDate') {
+                return new Date(a.uploadDate) - new Date(b.uploadDate);
+            }
+            return 0;
+        });
+        setFilteredDocuments(sortedDocs);
+    };
+
+    const handleSearchChange = (e) => {
+        const query = e.target.value.toLowerCase();
+        setSearchQuery(query);
+
+        const results = documents.filter(doc =>
+            doc.filename.toLowerCase().includes(query) ||
+            doc.description.toLowerCase().includes(query) ||
+            doc.userId.firstName.toLowerCase().includes(query) ||
+            doc.userId.lastName.toLowerCase().includes(query)
+        );
+
+        setFilteredDocuments(results);
+    };
+
+    // const handleFilterChange = (type) => {
+    //     setSelectedFileType(type);
+
+    //     if(type){
+    //       const filtered = documents.filter(doc => doc.fileType === type);
+    //       setFilteredDocuments(filtered);
+    //     }else{
+    //       setFilteredDocuments(documents);
+    //     }
+    // };
+
+    const handleFilterChange = (type) => {
+      setSelectedFileType(type);
+  
+      if (type) {
+          const filtered = documents.filter(doc => {
+              return doc.filePath && doc.filePath.endsWith(getFileExtension(type));
+          });
+          setFilteredDocuments(filtered);
+      } else {
+          setFilteredDocuments(documents); // Reset to all documents if no filter is selected
+      }
+  };
+  
+  // Helper function to map file type to file extensions
+  const getFileExtension = (mimeType) => {
+      switch (mimeType) {
+          case 'application/pdf':
+              return '.pdf';
+          case 'image/jpeg':
+              return '.jpg';
+          case 'image/png':
+              return '.png';
+          case 'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
+              return '.docx';
+          case 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':
+              return '.xlsx';
+          case 'application/vnd.openxmlformats-officedocument.presentationml.presentation':
+              return '.pptx';
+          // Add more cases as needed for other file types
+          default:
+              return ''; // Return empty if type is not found
+      }
+  };
+  
 
     const openEditModal = (doc) => {
         setCurrentDocument(doc);
@@ -92,7 +172,7 @@ const Documents = () => {
             });
             toast.success('Document updated successfully!');
             closeEditModal();
-            fetchDocuments();
+            fetchDocuments(); // Refetch to update documents
         } catch (error) {
             console.error('Error updating document:', error);
             toast.error('Failed to update document.');
@@ -122,6 +202,12 @@ const Documents = () => {
         formData.append('filename', newFilename);
         formData.append('file', newFile);
         formData.append('description', description);
+
+        if (newFile) {
+          const fileType = newFile.type; // Gets the MIME type of the file (e.g., 'application/pdf', 'image/png')
+          console.log(fileType);
+          formData.append('fileType', fileType); // Append the file type to the FormData
+      }
 
         try {
             await axios.post('/api/documents/upload', formData, {
@@ -170,136 +256,141 @@ const Documents = () => {
             <Sidebar activeComponent={'documents'} />
             <div className={styles.content}>
                 <header className={styles.header}>
-                    <GreetingHeader username="Lekan" />
+                    <GreetingHeader username={user.firstName} />
                 </header>
 
                 <div className={styles.mainSection}>
                     <h2 className={styles.sectionTitle}>Documents</h2>
                     <div className={styles.rowContainer}>
                         <div className={styles.searchContainer}>
-                            <input type="text" placeholder="Search documents" className={styles.searchInput} />
-                            <button className={styles.addButton} onClick={openUploadModal}>+</button>
+                            <input 
+                                type="text" 
+                                placeholder="Search documents" 
+                                value={searchQuery}
+                                onChange={handleSearchChange}
+                                className={styles.searchInput} 
+                            />
                         </div>
                         <div className={styles.sortContainer}>
                             <div className={styles.sortOptions}>
-                                <select className={styles.select} onChange={(e) => setSelectedMonth(e.target.value)}>
-                                    <option>This Month</option>
-                                    <option>Last Month</option>
-                                    <option>All Time</option>
-                                </select>
-                                <select className={styles.select} onChange={(e) => setSelectedFileType(e.target.value)}>
-                                    <option>Documents</option>
-                                    <option>Images</option>
-                                    <option>PDFs</option>
-                                </select>
+                                <SortDropdown onSortChange={handleSortChange} />
+                                <FilterDropdown 
+                                    onFilterChange={handleFilterChange} 
+                                    selectedPosition={selectedFileType} 
+                                />
+                                <button className={styles.addButton} onClick={openUploadModal}>+</button>
                             </div>
-                            <button className={styles.sortButton} onClick={() => setSortOption(sortOption === 'Date' ? 'Name' : 'Date')}>
-                                Sort by {sortOption}
-                            </button>
                         </div>
                     </div>
 
                     <div className={styles.documentsList}>
-                        {documents.map(doc => (
-                            <div className={styles.documentItem} key={doc._id}>
-                                <div className={styles.icon}>
-                                    <FaRegFileLines />
+                      <div className={styles.subHeader}>List of Documents</div>
+                            {filteredDocuments.map(doc => (
+                                <div className={styles.documentItem} key={doc._id}>
+                                    <div className={styles.icon}>
+                                        <FaRegFileLines />
+                                    </div>
+                                    <div className={styles.documentDetails}>
+                                        <h3 className={styles.fileName}>{doc.filename}</h3>
+                                        <p className={styles.uploadUser}>
+                                            {doc.userId.firstName} {doc.userId.lastName}
+                                        </p>
+                                    </div>
+                                    <div className={styles.documentDate}>
+                                        <p className={styles.uploadDate}>
+                                            {new Date(doc.uploadDate).toLocaleDateString()}
+                                        </p>
+                                    </div>
+                                    <div className={styles.actions}>
+                                        <button onClick={() => handlePreviewDocument(doc._id)} className={styles.editButton}>
+                                            <VscOpenPreview />
+                                        </button>
+                                        <button onClick={() => handleDownloadDocument(doc._id)} className={styles.editButton}>
+                                            <FaDownload />
+                                        </button>
+                                        <button className={styles.editButton} onClick={() => openEditModal(doc)}>
+                                            <MdOutlineModeEdit />
+                                        </button>
+                                        <button className={styles.deleteButton} onClick={() => confirmDeleteDocument(doc)}>
+                                            <MdDelete />
+                                        </button>
+                                    </div>
                                 </div>
-                                <div className={styles.documentDetails}>
-                                    <h3>{doc.filename}</h3>
-                                    <p className={styles.uploadUser}>{doc.userId.firstName} {doc.userId.lastName}</p>
-                                </div>
-                                <div className={styles.documentDate}>
-                                    <p className={styles.uploadDate}>{new Date(doc.uploadDate).toLocaleDateString()}</p>
-                                </div>
-                                <div className={styles.actions}>
-                                    <button onClick={() => handlePreviewDocument(doc._id)} className={styles.editButton}>
-                                        <VscOpenPreview />
-                                    </button>
-                                    <button onClick={() => handleDownloadDocument(doc._id)} className={styles.editButton}>
-                                        <FaDownload />
-                                    </button>
-                                    <button className={styles.editButton} onClick={() => openEditModal(doc)}>
-                                        <MdOutlineModeEdit />
-                                    </button>
-                                    <button className={styles.deleteButton} onClick={() => confirmDeleteDocument(doc)}>
-                                        <MdDelete />
-                                    </button>
-                                </div>
-                            </div>
-                        ))}
+                            ))}
+                        </div>
                     </div>
+
+                    {/* Edit Document Modal */}
+                    <Modal
+                        isOpen={isEditModalOpen}
+                        onRequestClose={closeEditModal}
+                        className={styles.modalContent}
+                        overlayClassName={styles.modalOverlay}
+                    >
+                        <h2>Edit Document</h2>
+                        <input
+                            type="text"
+                            value={newFilename}
+                            onChange={(e) => setNewFilename(e.target.value)}
+                            placeholder="New filename"
+                            className={styles.inputField}
+                        />
+                        <input type="file" onChange={handleFileChange} className={styles.inputField} />
+                        <textarea
+                            value={description}
+                            onChange={(e) => setDescription(e.target.value)}
+                            placeholder="Description"
+                            className={styles.textAreaField}
+                        />
+                        <div className={styles.actionButtons}>
+                            <button onClick={closeEditModal} className={styles.cancelTaskBtn}>
+                                Cancel <MdCancel />
+                            </button>
+                            <button onClick={handleEditDocument} className={styles.saveTaskBtn}>
+                                Save Changes <FaSave />
+                            </button>
+                        </div>
+                    </Modal>
+
+                    {/* Upload Document Modal */}
+                    <Modal
+                        isOpen={isUploadModalOpen}
+                        onRequestClose={closeUploadModal}
+                        className={styles.modalContent}
+                        overlayClassName={styles.modalOverlay}
+                    >
+                        <h2>Upload Document</h2>
+                        <input
+                            type="text"
+                            value={newFilename}
+                            onChange={(e) => setNewFilename(e.target.value)}
+                            placeholder="Filename"
+                            className={styles.inputField}
+                        />
+                        <input type="file" onChange={handleFileChange} className={styles.inputField} />
+                        <textarea
+                            value={description}
+                            onChange={(e) => setDescription(e.target.value)}
+                            placeholder="Description"
+                            className={styles.textAreaField}
+                        />
+                        <div className={styles.actionButtons}>
+                            <button onClick={closeUploadModal} className={styles.cancelTaskBtn}>
+                                Cancel <MdCancel />
+                            </button>
+                            <button onClick={handleUploadDocument} className={styles.saveTaskBtn}>
+                                Upload <FaUpload />
+                            </button>
+                        </div>
+                    </Modal>
                 </div>
             </div>
-
-                        {/* Edit Document Modal */}
-                        <Modal
-                isOpen={isEditModalOpen}
-                onRequestClose={closeEditModal}
-                className={styles.modalContent}
-                overlayClassName={styles.modalOverlay}
-            >
-                <h2>Edit Document</h2>
-                <input
-                    type="text"
-                    value={newFilename}
-                    onChange={(e) => setNewFilename(e.target.value)}
-                    placeholder="New filename"
-                    className={styles.inputField}
-                />
-                <input type="file" onChange={handleFileChange} className={styles.inputField} />
-                <textarea
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                    placeholder="Description"
-                    className={styles.textAreaField}
-                />
-                <div className={styles.actionButtons}>
-                    <button onClick={handleEditDocument} className={styles.saveTaskBtn}>
-                        Save Changes <FaSave />
-                    </button>
-                    <button onClick={closeEditModal} className={styles.cancelTaskBtn}>
-                        Cancel <MdCancel />
-                    </button>
-                </div>
-            </Modal>
-
-            {/* Upload Document Modal */}
-            <Modal
-                isOpen={isUploadModalOpen}
-                onRequestClose={closeUploadModal}
-                className={styles.modalContent}
-                overlayClassName={styles.modalOverlay}
-            >
-                <h2>Upload Document</h2>
-                <input
-                    type="text"
-                    value={newFilename}
-                    onChange={(e) => setNewFilename(e.target.value)}
-                    placeholder="Filename"
-                    className={styles.inputField}
-                />
-                <input type="file" onChange={handleFileChange} className={styles.inputField} />
-                <textarea
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                    placeholder="Description"
-                    className={styles.textAreaField}
-                />
-                <div className={styles.actionButtons}>
-                    <button onClick={handleUploadDocument} className={styles.saveTaskBtn}>
-                        Upload <FaUpload />
-                    </button>
-                    <button onClick={closeUploadModal} className={styles.cancelTaskBtn}>
-                        Cancel <MdCancel />
-                    </button>
-                </div>
-            </Modal>
-        </div>
     );
 };
 
 export default Documents;
+
+
 
 
 

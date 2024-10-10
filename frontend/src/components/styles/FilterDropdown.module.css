@@ -1,11 +1,21 @@
-/* FilterDropdown.module.css */
-
-
 .filterDropdown {
-    margin-left: 10px;
+  margin: 1rem 0;
 }
 
-.filterDropdown label{
+.filterDropdown label {
+  margin-right: 0.5rem;
   font-weight: bold;
 }
-  
+
+.filterDropdown select {
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+  cursor: pointer;
+}
+
+.filterDropdown select:hover {
+  border-color: #888;
+}
