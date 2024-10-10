@@ -127,7 +127,7 @@
 
 .documentDetails h3 {
     margin: 0;
-    width: 70%;
+    /* width: 70%; */
     font-size: 18px;
     color: #333;
 }
