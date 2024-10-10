@@ -92,6 +92,8 @@ const TaskSection = ({ userId }) => {
   };
 
   const handleFileChange = (e) => {
+    console.log(e.target.files);
+    console.log(e.target.files[0]);
     setNewTask(prevState => ({
       ...prevState,
       file: e.target.files[0]
@@ -155,6 +157,10 @@ const TaskSection = ({ userId }) => {
       formData.append(`comments[${index}]`, comment);
     });
 
+    if (newTask.file) {
+      formData.append('file', newTask.file);
+    }
+
     try {
       const response = await axios.post('/api/tasks/add', formData, {
         headers: {
@@ -171,7 +177,8 @@ const TaskSection = ({ userId }) => {
       closeTaskModal();
     } catch (err) {
       console.error('Error while adding task:', err);
-      toast.error('Failed to add task.');
+      toast.error(err.response?.data?.error || 'Failed to add task.');
+      // toast.error('Failed to add task.');
     }
   };
 
@@ -241,7 +248,7 @@ const TaskSection = ({ userId }) => {
         <div className={styles.footer}>
           <div className={`${styles.dueDate} ${dueDateClass}`}>{new Date(task.dueDate).toDateString()}</div>
           <span><TfiCommentAlt /> {task.comments.length}</span>
-          <span><GoLink /> {task.attachments.length}</span>
+          <span><GoLink /> {task.attachments?.length}</span>
         </div>
       </div>
     );
@@ -396,7 +403,7 @@ const TaskSection = ({ userId }) => {
             <h3>Comments</h3>
             <p>{selectedTask.comments.length} Comments</p>
             <h3>Attachments</h3>
-            <p>{selectedTask.attachments.length} Attachments</p>
+            <p>{selectedTask.attachments?.length} Attachments</p>
           </div>
         )}
       </Modal>

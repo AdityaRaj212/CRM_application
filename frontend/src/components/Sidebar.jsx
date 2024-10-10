@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './styles/Sidebar.module.css';
 
-const Sidebar = () => {
+const Sidebar = ({activeComponent}) => {
   const navigate = useNavigate();
-  const [activeMenu, setActiveMenu] = useState('dashboard'); // State for active menu
+  const [activeMenu, setActiveMenu] = useState(activeComponent); // State for active menu
 
   const handleMenuClick = (menu) => {
     setActiveMenu(menu); // Set the active menu
@@ -15,6 +15,10 @@ const Sidebar = () => {
       
       case 'users':
         navigate('/users');
+        break;
+
+      case 'documents':
+        navigate('/documents');
         break;
 
       default:
@@ -43,7 +47,10 @@ const Sidebar = () => {
           <span className={styles.icon}>📊</span>
           <span className={styles.text}>Users</span>
         </li>
-        <li className={styles.menuItem}>
+        <li
+          className={`${styles.menuItem} ${activeMenu === 'documents' ? styles.active : ''}`}
+          onClick={() => handleMenuClick('documents')}
+        >
           <span className={styles.icon}>📄</span>
           <span className={styles.text}>Documents</span>
         </li>

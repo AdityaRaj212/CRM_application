@@ -161,7 +161,7 @@ const AdminDashboard = () => {
 
   return (
     <div className={styles.dashboard}>
-      <Sidebar />
+      <Sidebar activeComponent={'dashboard'}/>
       <div className={styles.content}>
         <header className={styles.header}>
           <GreetingHeader username={userName} />

@@ -7,6 +7,7 @@ import Login from './pages/Login';
 import './App.css';  // Import global styles
 import AdminDashboard from './pages/AdminDashboard';
 import Users from './pages/Users';
+import Documents from './pages/Documents';
 
 function App() {
   // const [tasks, setTasks] = useState([]);
@@ -25,6 +26,7 @@ function App() {
         <Route path='/auth' element = {<Login/>} />
         <Route path='/admin' element = {<AdminDashboard/>} />
         <Route path='/users' element = {<Users/>} />
+        <Route path='/documents' element = {<Documents/>} />
       </Routes>
     </Router>
     // <div className="App">

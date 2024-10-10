@@ -145,7 +145,7 @@ const Users = () => {
 
   return (
     <div className={styles.dashboard}>
-      <Sidebar />
+      <Sidebar activeComponent={'users'}/>
       <div className={styles.content}>
         <header className={styles.header}>
           <GreetingHeader username={userName} />

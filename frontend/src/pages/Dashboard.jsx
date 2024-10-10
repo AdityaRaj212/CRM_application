@@ -67,7 +67,7 @@ const Dashboard = () => {
 
   return (
     <div className={styles.dashboard}>
-      <Sidebar /> {/* Sidebar can render immediately */}
+      <Sidebar activeComponent={'dashboard'}/> {/* Sidebar can render immediately */}
 
       <div className={styles.content}>
         <header className={styles.header}>

@@ -1,9 +1,11 @@
 import TaskRepository from './task.repository.js';
+import DocumentRepository from '../document/document.repository.js';
 import { TaskModel } from './task.schema.js';
 
 export default class TaskController {
     constructor() {
         this.taskRepository = new TaskRepository();
+        this.documentRepository = new DocumentRepository();
     }
 
     // async addTask(req, res) {
@@ -23,7 +25,7 @@ export default class TaskController {
 
     async addTask(req, res) {
         try {
-            console.log(req.body);
+          console.log(req.body);
           const { name, description, dueDate, assignedTo, checkpoints, comments } = req.body;
           console.log(checkpoints);
       
@@ -42,7 +44,20 @@ export default class TaskController {
               description: cp.description,
               completed: cp.completed,
             })),
+            attachments: []
           };
+
+          if (req.file) {
+            const documentData = {
+            userId: assignedTo,
+            filename: req.file.originalname,
+            filePath: req.file.path,
+          };
+      
+            // Save the document and get the document ID
+            const document = await this.documentRepository.createDocument(documentData);
+            newTask.attachments.push(document._id);
+          }
       
           // Call the repository to save the task
           const createdTask = await this.taskRepository.addTask(newTask);

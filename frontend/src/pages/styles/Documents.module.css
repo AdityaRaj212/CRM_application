@@ -1,0 +1,286 @@
+/* Documents.module.css */
+.dashboard {
+    display: flex;
+    background-color: #F5F5F5;
+    min-height: 100vh;
+}
+
+.content {
+    margin-left: 15rem; /* Adjust based on your sidebar width */
+    padding: 1rem 2rem;
+    flex: 1;
+}
+
+.header {
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sectionTitle {
+    color: #4985F6;
+    margin-bottom: 1rem;
+}
+
+.mainSection {
+    margin-top: 2rem;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+}
+
+/* Actions bar */
+.actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+}
+
+.searchInput {
+    flex: 1;
+    padding: 0.5rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.searchInput:focus {
+    border-color: #0B94FA;
+}
+
+.sortOptions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.select {
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    outline: none;
+}
+
+.addButton {
+    background-color: #0B94FA;
+    color: white;
+    border: none;
+    padding: 0.5rem 1.5rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.addButton:hover {
+    background-color: #0A7DC2;
+    transform: translateY(-2px);
+}
+
+/* Document list styles */
+.documentsList {
+    margin-top: 1rem;
+}
+
+.documentItem {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: box-shadow 0.3s;
+}
+
+.documentItem:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.icon{
+    font-size: 2rem;
+    margin: 1rem;
+}
+
+.documentDetails {
+    /* flex: 1; */
+}
+
+.documentDetails h3 {
+    margin: 0;
+    font-size: 18px;
+    color: #333;
+}
+
+.uploadDate, .uploadUser {
+    margin: 0.5rem 0;
+    color: #666;
+}
+
+.actions {
+    display: flex;
+    gap: 1rem;
+}
+
+.editButton, .deleteButton {
+    background-color: transparent;
+    border: 1px solid #0B94FA;
+    color: #0B94FA;
+    border-radius: 5px;
+    padding: 0.3rem 0.7rem;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.editButton:hover, .deleteButton:hover {
+    background-color: #0B94FA;
+    color: white;
+}
+
+.modalOverlay {
+    position: fixed; 
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7); /* Dark semi-transparent background */
+    display: flex;
+    align-items: center; /* Center vertically */
+    justify-content: center; /* Center horizontally */
+}
+
+.modalContent {
+    background-color: #ffffff;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    max-width: 75%; 
+    width: 100%; 
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.inputField {
+    max-width: 80%;
+    padding: 0.5rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+    transition: border-color 0.3s;
+}
+
+.inputField:focus {
+    border-color: #0B94FA;
+}
+
+.textAreaField {
+    width: 80%;
+    padding: 0.5rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+    height: 100px;
+    resize: none;
+    transition: border-color 0.3s;
+}
+
+.textAreaField:focus {
+    border-color: #0B94FA;
+}
+
+.actionButtons{
+    display: flex;
+    width: 80%;
+    justify-content: space-between;
+}
+
+.saveTaskBtn, .cancelTaskBtn {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background-color: #0B94FA;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 15px;
+    width: 11rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-right: 1rem;
+}
+
+.saveTaskBtn:hover, .cancelTaskBtn:hover {
+    background-color: #0A7DC2;
+}
+
+.cancelTaskBtn {
+    background-color: #ff4d4d; /* Red for cancel button */
+}
+
+.cancelTaskBtn:hover {
+    background-color: #e63939; /* Darker red */
+}
+
+.rowContainer {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1.5rem; /* Adjust spacing */
+}
+
+.searchContainer {
+    display: flex;
+    align-items: center;
+}
+
+.sortContainer {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.sortOptions {
+    display: flex;
+    gap: 1rem;
+}
+
+.select {
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    outline: none;
+}
+
+.addButton {
+    background-color: #0B94FA;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    margin-left: 1rem; /* Add space between search input and button */
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.addButton:hover {
+    background-color: #0A7DC2;
+    transform: translateY(-2px);
+}
+
+.sortButton {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.sortButton:hover {
+    background-color: #f0f0f0;
+}
+
+

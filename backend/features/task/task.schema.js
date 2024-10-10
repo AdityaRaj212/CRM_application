@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose, { mongo } from 'mongoose';
 
 const TaskSchema = new mongoose.Schema({
     name: { type: String, required: true },
@@ -8,7 +8,7 @@ const TaskSchema = new mongoose.Schema({
     dueDate: { type: Date },
     status: { type: String, enum: ['To-Do', 'In-progress', 'Completed'] },
     comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Message' }],
-    attachments: [{ type: String }],
+    attachments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Document' }],
 
     // Checkpoints for each task
     checkpoints: [
