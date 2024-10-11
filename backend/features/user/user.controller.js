@@ -9,6 +9,27 @@ export default class UserController {
         this.googleClient = new OAuth2Client(process.env.GOOGLE_CLIENT_ID); // Initialize Google OAuth2Client
     }
 
+    async getMe(req, res){
+        try{
+            const userId = req.user.userId;
+            const user = await this.userRepository.getMe(userId);
+
+            if(!user){
+                return res.status(404).json({ message: 'User not found.' });
+            }
+            
+            res.status(200).json({
+                status: true,
+                user
+            })
+        }catch(err){
+            res.status(500).json({
+                message: 'Error while fetching current user',
+                error: err.message
+            })
+        }
+    }
+
     async allUsers(req, res){
         try{
             const users = await this.userRepository.allUsers();

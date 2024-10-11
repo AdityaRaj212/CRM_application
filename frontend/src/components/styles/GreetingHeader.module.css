@@ -1,55 +1,124 @@
 .greetingHeader {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem;
-    background-color: #ffffff;
-    margin-bottom: 1rem;
-  }
-  
-  .greeting {
-    font-size: 16px;
-    color: #333;
-    font-weight: 600;
-  }
-  
-  .profileSection {
-    display: flex;
-    align-items: center;
-  }
-  
-  .breakButton, .resumeButton {
-    background-color: #333;
-    color: #fff;
-    padding: 0.5rem 1rem;
-    border: none;
-    border-radius: 8px;
-    margin-right: 1rem;
-    cursor: pointer;
-    font-size: 14px;
-  }
-  
-  .breakButton {
-    background-color: #f0f0f0;
-    color: #333;
-    border: 1px solid #ddd;
-  }
-  
-  .resumeButton {
-    background-color: #333;
-    color: white;
-  }
-  
-  .breakButton:hover, .resumeButton:hover {
-    background-color: #5661cc;
-    color: white;
-  }
-  
-  .profileAvatar img {
-    width: 40px;
-    height: 40px;
-    aspect-ratio: 1/1;
-    border-radius: 50%;
-    object-fit: cover;
-  }
-  
+  height: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: #ffffff;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid #ddd; /* Subtle border for separation */
+  border-radius: 10px;
+  position: relative; /* Make position relative for absolute dropdown */
+}
+
+.greeting {
+  font-size: 16px;
+  color: #333;
+  font-weight: 600;
+}
+
+.breakOptions{
+  /* border: 2px solid red; */
+  display: flex;
+}
+
+/* .breakOptions button{
+  margin: 0 1rem;
+  padding: 0.5rem;
+} */
+
+.breakButton, .resumeButton {
+  background-color: #333;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 8px;
+  margin-right: 1rem;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.breakButton {
+  background-color: #f0f0f0;
+  color: #333;
+  border: 1px solid #ddd;
+}
+
+.resumeButton {
+  background-color: #333;
+  color: white;
+}
+
+.breakButton:hover, .resumeButton:hover {
+  background-color: #5661cc;
+  color: white;
+}
+
+.profileSection {
+  display: flex;
+  align-items: center;
+  cursor: pointer; 
+}
+
+.profileAvatar img {
+  width: 40px;
+  height: 40px;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  object-fit: cover;
+  /* border: 2px solid red; */
+}
+
+.userInfo {
+  margin-left: 10px; /* Space between avatar and text */
+}
+
+.username {
+  font-weight: bold;
+  color: #333;
+}
+
+.position {
+  font-size: 12px;
+  color: #666; /* Slightly lighter color for position */
+}
+
+/* Dropdown Styles */
+.dropdown {
+  position: absolute; /* Position dropdown relative to parent */
+  top: 4rem; /* Adjust based on the height of the profile section */
+  right: 0; /* Align to the right */
+  background: white;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for dropdown */
+  width: 200px; /* Set width for dropdown */
+  z-index: 1000; /* Ensure dropdown appears above other elements */
+}
+
+.dropdownActions {
+  display: flex;
+  justify-content: space-between; /* Space buttons evenly */
+}
+
+.logoutButton, .cancelButton {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.logoutButton {
+  background-color: #ff4757; /* Red color for logout */
+  color: white;
+}
+
+.cancelButton {
+  background-color: #ccc; /* Grey color for cancel */
+  color: #333;
+}
+
+.logoutButton:hover, .cancelButton:hover {
+  opacity: 0.8; /* Slightly transparent on hover */
+}

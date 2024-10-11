@@ -12,6 +12,16 @@ export default class UserRepository {
         }
     }
 
+    async getMe(userId){
+        try{    
+            const user = await UserModel.findById(userId).select('-password');
+            return user;
+        }catch(err){
+            console.error('Error while fetching current user: ', err);
+            throw new Error(err);
+        }
+    }
+
     async addUser(firstName, lastName, email, mobileNo, position, userName, password, oauthProvider = 'local', oauthId = null) {
         try {
             const newUser = new UserModel({

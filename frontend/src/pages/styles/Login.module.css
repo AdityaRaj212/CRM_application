@@ -1,0 +1,133 @@
+/* Container for the entire login section */
+.loginContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+/* Card style for the login form */
+.loginCard {
+    background-color: white;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+/* Styling the form headings */
+h2 {
+    margin-bottom: 20px;
+    font-size: 28px;
+    color: #333;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+/* Form styles */
+.form {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.input {
+    width: 100%;
+    padding: 15px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    background-color: #f4f4f4;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.input:focus {
+    border-color: #f093fb;
+    background-color: #fff;
+    outline: none;
+}
+
+/* Submit buttons for login and signup */
+.button {
+    width: 100%;
+    padding: 15px;
+    background-color: #f093fb;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.button:hover {
+    background-color: #f5576c;
+}
+
+/* Toggle between login and signup */
+.toggleText {
+    margin: 15px 0;
+    font-size: 14px;
+    color: #666;
+}
+
+.toggleButton {
+    color: #f093fb;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.toggleButton:hover {
+    text-decoration: underline;
+}
+
+/* Google login button */
+.googleButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 12px;
+    background-color: white;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    color: #444;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    margin-top: 20px;
+}
+
+.googleButton:hover {
+    background-color: #f4f4f4;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.googleButton img {
+    margin-right: 10px;
+    width: 20px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .loginCard {
+        padding: 30px;
+        width: 90%;
+    }
+
+    .input, .button {
+        font-size: 14px;
+        padding: 12px;
+    }
+
+    h2 {
+        font-size: 22px;
+    }
+}

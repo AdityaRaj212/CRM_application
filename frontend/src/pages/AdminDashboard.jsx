@@ -10,75 +10,56 @@ import styles from './styles/AdminDashboard.module.css';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
+import { useAuth } from '../context/AuthContext';
+import LoginPage from './Login';
+import Loading from '../components/Loading';
 
 const AdminDashboard = () => {
-  const [user, setUser] = useState('');
+  const {loading, user} = useAuth();
   const [users, setUsers] = useState([]);
   const [userName, setUserName] = useState('User');
-  const [loading, setLoading] = useState(true);
+  const [loading2, setLoading2] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [positionFilter, setPositionFilter] = useState('');
-  const [currentPage, setCurrentPage] = useState(1); // State for current page
-  const [usersPerPage] = useState(5); // Number of users per page
+  const [currentPage, setCurrentPage] = useState(1); 
+  const [usersPerPage] = useState(5); 
   const [sortOption, setSortOption] = useState('name');
-  const [filteredUsers, setFilteredUsers] = useState([]); // State for filtered users
+  const [filteredUsers, setFilteredUsers] = useState([]); 
 
-    // Fetch user details once the component is mounted
+    useEffect(()=>{
+      if(!loading && user){
+        setUserName(user.firstName);
+      }
+    },[loading, user]);
+
     useEffect(() => {
       const fetchDetails = async () => {
-        try {
-          const storedUserId = localStorage.getItem('userId');
-          if (storedUserId) {
-            const userResponse = await axios.get(`/api/users/get-user-by-id/${storedUserId}`);
-            setUser(userResponse.data.user);
-            setUserName(userResponse.data.user.firstName);
-          }
-
-          const response = await axios.get('/api/users'); // Adjust this endpoint
-          setUsers(response.data.users); // Set users from API response
-          setFilteredUsers(response.data.users); // Initialize filtered users
+        try {             
+          const response = await axios.get('/api/users'); 
+          setUsers(response.data.users); 
+          setFilteredUsers(response.data.users); 
         } catch (err) {
           console.error('Error while fetching user details:', err);
         } finally {
-          setLoading(false); // Once the fetch is complete, set loading to false
+          setLoading2(false); 
         }
       };
       
       fetchDetails();
     },[]);
 
-  // useEffect(() => {
-  //   const fetchUsers = async () => {
-  //     try {
-  //       const response = await axios.get('/api/users'); // Adjust this endpoint
-  //       setUsers(response.data.users); // Set users from API response
-  //       setFilteredUsers(response.data.users); // Initialize filtered users
-  //     } catch (error) {
-  //       console.error('Error fetching users:', error);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
-
-  //   fetchUsers();
-  // }, []);
-
-   // Function to handle sorting
    const handleSortChange = (option) => {
     setSortOption(option);
     sortUsers(option);
   };
 
-  // Function to sort users based on selected option
   const sortUsers = (option) => {
     const sortedUsers = [...filteredUsers].sort((a, b) => {
       if (option === 'firstName') {
         return a.firstName.localeCompare(b.firstName);
       } else if (option === 'joiningDate') {
-        console.log(a.joiningDate);
-        console.log(b.joiningDate);
         return new Date(a.joiningDate) - new Date(b.joiningDate);
       } else if (option === 'role') {
         return a.position.localeCompare(b.position);
@@ -96,9 +77,9 @@ const AdminDashboard = () => {
     user.role.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  const indexOfLastUser = currentPage * usersPerPage; // Last user index on current page
-  const indexOfFirstUser = indexOfLastUser - usersPerPage; // First user index on current page
-  const currentUsers = filteredUsers.slice(indexOfFirstUser, indexOfLastUser); // Get users for the current page
+  const indexOfLastUser = currentPage * usersPerPage; 
+  const indexOfFirstUser = indexOfLastUser - usersPerPage; 
+  const currentUsers = filteredUsers.slice(indexOfFirstUser, indexOfLastUser); 
 
   const handleSearchChange = (e) => {
     const query = e.target.value.toLowerCase();
@@ -114,7 +95,7 @@ const AdminDashboard = () => {
     );
 
     setFilteredUsers(results);
-    setCurrentPage(1); // Reset to first page on search
+    setCurrentPage(1); 
   };
 
   const handlePositionFilterChange = (position) => {
@@ -124,9 +105,9 @@ const AdminDashboard = () => {
       const filtered = users.filter(user => user.position === position);
       setFilteredUsers(filtered);
     } else {
-      setFilteredUsers(users); // Reset to all users if no filter is selected
+      setFilteredUsers(users); 
     }
-    setCurrentPage(1); // Reset to first page on filter change
+    setCurrentPage(1); 
   };
 
   const openModal = () => {
@@ -142,7 +123,7 @@ const AdminDashboard = () => {
     try {
       await axios.delete(`/api/users/${userId}`);
       toast.success('User deleted successfully');
-      setUsers(users.filter(user => user._id !== userId)); // Remove the user from the local state
+      setUsers(users.filter(user => user._id !== userId)); 
     } catch (error) {
       console.error('Error deleting user:', error);
       toast.error('Unable to delete user. Something went wrong');
@@ -153,11 +134,15 @@ const AdminDashboard = () => {
     setCurrentPage(pageNumber);
   };
 
-  if (loading) {
-    return <div className={styles.loading}>Loading...</div>;
+  if (loading || loading2) {
+    return <Loading/>
   }
 
-  const totalPages = Math.ceil(filteredUsers.length / usersPerPage); // Calculate total pages
+  if((!user || (user && user.position==='Employee'))){
+    return <LoginPage/>
+  }
+
+  const totalPages = Math.ceil(filteredUsers.length / usersPerPage); 
 
   return (
     <div className={styles.dashboard}>
@@ -201,7 +186,6 @@ const AdminDashboard = () => {
         </div>
       </div>
 
-      {/* Add User Modal */}
       <AddUserModal isOpen={isModalOpen} onRequestClose={closeModal} />
       <ToastContainer />
     </div>

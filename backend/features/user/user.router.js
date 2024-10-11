@@ -1,11 +1,13 @@
 import express from 'express';
 import UserController from './user.controller.js';
+import { authMiddleware } from '../../middlewares/auth.middleware.js';
 
 const userController = new UserController();
 const router = express.Router();
 
 router.get('/', (req, res) => userController.allUsers(req, res));
 
+router.get('/me', authMiddleware, (req, res) => userController.getMe(req, res));
 // Local Signup
 router.post('/signup', (req, res) => userController.signup(req, res));
 

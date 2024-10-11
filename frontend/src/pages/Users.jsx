@@ -10,12 +10,15 @@ import styles from './styles/Users.module.css';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
+import LoginPage from './Login';
+import { useAuth } from '../context/AuthContext';
+import Loading from '../components/Loading';
 
 const Users = () => {
-  const [user, setUser] = useState('');
+  const {user, loading} = useAuth();
   const [users, setUsers] = useState([]);
   const [userName, setUserName] = useState('User');
-  const [loading, setLoading] = useState(true);
+  const [loading2, setLoading2] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
@@ -29,20 +32,13 @@ const Users = () => {
   useEffect(() => {
     const fetchDetails = async () => {
       try {
-        const storedUserId = localStorage.getItem('userId');
-        if (storedUserId) {
-          const userResponse = await axios.get(`/api/users/get-user-by-id/${storedUserId}`);
-          setUser(userResponse.data.user);
-          setUserName(userResponse.data.user.firstName);
-        }
-
         const response = await axios.get('/api/users'); // Adjust this endpoint
         setUsers(response.data.users); // Set users from API response
         setFilteredUsers(response.data.users); // Initialize filtered users
       } catch (err) {
         console.error('Error while fetching user details:', err);
       } finally {
-        setLoading(false); // Once the fetch is complete, set loading to false
+        setLoading2(false); // Once the fetch is complete, set loading to false
       }
     };
     
@@ -137,8 +133,12 @@ const Users = () => {
     setCurrentPage(pageNumber);
   };
 
-  if (loading) {
-    return <div className={styles.loading}>Loading...</div>;
+  if (loading || loading2) {
+    return <Loading/>;
+  }
+
+  if((!user || (user && user.position==='Employee'))){
+    return <LoginPage/>
   }
 
   const totalPages = Math.ceil(filteredUsers.length / usersPerPage); // Calculate total pages

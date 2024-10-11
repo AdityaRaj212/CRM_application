@@ -13,11 +13,14 @@ import { FaDownload, FaUpload, FaSave } from "react-icons/fa";
 import { MdCancel } from "react-icons/md";
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useAuth } from '../context/AuthContext';
+import LoginPage from './Login';
+import Loading from '../components/Loading';
 
 const Documents = () => {
-    const [user, setUser] = useState('');
+    const {loading, user} = useAuth();
     const [documents, setDocuments] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const [loading2, setLoading2] = useState(true);
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
     const [currentDocument, setCurrentDocument] = useState(null);
@@ -34,20 +37,31 @@ const Documents = () => {
         fetchDocuments();
     }, []);
 
+    useEffect(() => {
+        if (!loading && user) {
+            // Filter documents based on user position
+            console.log('Docs:  ',documents );
+            console.log(user);
+
+            if (user.position === 'Employee') {
+                const employeeDocs = documents.filter(doc => doc.userId._id === user._id);
+                setFilteredDocuments(employeeDocs);
+                console.log(employeeDocs);
+            } else {
+                setFilteredDocuments(documents);
+            }
+        }
+    }, [loading, user, documents]);
+
     const fetchDocuments = async () => {
         try {
             const response = await axios.get('/api/documents');
             setDocuments(response.data);
-            setFilteredDocuments(response.data); // Initialize filtered documents
-            const storedUserId = localStorage.getItem('userId');
-            if (storedUserId) {
-                const userResponse = await axios.get(`/api/users/get-user-by-id/${storedUserId}`);
-                setUser(userResponse.data.user);
-            }
+            setFilteredDocuments(response.data); 
         } catch (error) {
             console.error('Error fetching documents:', error);
         } finally {
-            setLoading(false);
+            setLoading2(false);
         }
     };
 
@@ -79,34 +93,59 @@ const Documents = () => {
             doc.userId.lastName.toLowerCase().includes(query)
         );
 
-        setFilteredDocuments(results);
+        if(user && user.position==='Employee'){
+            setFilteredDocuments(results.filter(doc=>doc.userId._id===user._id));
+        }else{
+            setFilteredDocuments(results);
+        }
+
     };
-
-    // const handleFilterChange = (type) => {
-    //     setSelectedFileType(type);
-
-    //     if(type){
-    //       const filtered = documents.filter(doc => doc.fileType === type);
-    //       setFilteredDocuments(filtered);
-    //     }else{
-    //       setFilteredDocuments(documents);
-    //     }
-    // };
 
     const handleFilterChange = (type) => {
       setSelectedFileType(type);
-  
+
       if (type) {
           const filtered = documents.filter(doc => {
-              return doc.filePath && doc.filePath.endsWith(getFileExtension(type));
+              return doc.fileType === type; // Ensure doc.fileType matches the selected type
           });
-          setFilteredDocuments(filtered);
+
+          // If user is an employee, filter further by user ID
+          if (user && user.position === 'Employee') {
+              setFilteredDocuments(filtered.filter(doc => doc.userId._id === user._id));
+          } else {
+              setFilteredDocuments(filtered);
+          }
       } else {
-          setFilteredDocuments(documents); // Reset to all documents if no filter is selected
+          // Reset filter
+          if (user && user.position === 'Employee') {
+              setFilteredDocuments(documents.filter(doc => doc.userId._id === user._id));
+          } else {
+              setFilteredDocuments(documents);
+          }
       }
   };
+
+  //   const handleFilterChange = (type) => {
+  //     setSelectedFileType(type);
   
-  // Helper function to map file type to file extensions
+  //     if (type) {
+  //         const filtered = documents.filter(doc => {
+  //             return doc.filePath && doc.filePath.endsWith(getFileExtension(type));
+  //         });
+  //         if(user && user.position==='Employee'){
+  //           setFilteredDocuments(filtered.filter(doc=>doc.userId===user._id));
+  //         }else{
+  //           setFilteredDocuments(filtered);
+  //         }
+  //     } else {
+  //         if(user && user.position==='Employee'){
+  //             setFilteredDocuments(documents.filter(doc=>doc.userId===user._id));
+  //         }else{
+  //             setFilteredDocuments(documents);
+  //         }
+  //     }
+  // };
+  
   const getFileExtension = (mimeType) => {
       switch (mimeType) {
           case 'application/pdf':
@@ -246,8 +285,12 @@ const Documents = () => {
         }
     };
 
-    if (loading) {
-        return <div className={styles.loading}>Loading...</div>;
+    if (loading || loading2) {
+        return <Loading/>
+    }   
+
+    if(!user){
+      return <LoginPage/>
     }
 
     return (

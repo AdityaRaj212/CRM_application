@@ -10,6 +10,7 @@ import styles from './styles/AdminDashboard.module.css';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
+import Loading from '../components/Loading';
 
 const AdminDashboard = () => {
   const [users, setUsers] = useState([]);
@@ -108,7 +109,7 @@ const AdminDashboard = () => {
   };
 
   if (loading) {
-    return <div className={styles.loading}>Loading...</div>;
+    return <Loading/>
   }
 
   return (
