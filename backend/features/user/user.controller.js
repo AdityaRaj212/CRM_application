@@ -127,6 +127,8 @@ export default class UserController {
         try {
             const { userId } = req.params;
             const updateData = req.body;
+            console.log(req.body);
+            console.log(updateData);
     
             const updatedUser = await this.userRepository.updateUser(userId, updateData);
             res.status(200).json({

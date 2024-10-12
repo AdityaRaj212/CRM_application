@@ -10,6 +10,9 @@ import Users from './pages/Users';
 import Documents from './pages/Documents';
 import { AuthProvider } from './context/AuthContext';
 import { ToastContainer } from 'react-toastify';
+import Hierarchy from './pages/Hierarchy';
+import Help from './pages/Help';
+import Settings from './pages/Settings';
 
 function App() {
   return (
@@ -22,6 +25,9 @@ function App() {
           <Route path='/admin' element = {<AdminDashboard/>} />
           <Route path='/users' element = {<Users/>} />
           <Route path='/documents' element = {<Documents/>} />
+          <Route path='/hierarchy' element = {<Hierarchy/>} />
+          <Route path='/help' element = {<Help/>} />
+          <Route path='/settings' element = {<Settings/>} />
         </Routes>
       </Router>
     </AuthProvider>

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { GoogleLogin } from 'react-google-login';
 import axios from 'axios';
 import styles from './styles/Login.module.css';
+import './styles/Login.css';
 
 const LoginPage = () => {
     const [email, setEmail] = useState('');

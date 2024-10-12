@@ -1,0 +1,57 @@
+.helpContainer {
+    display: flex;
+    height: 100vh;
+    background-color: #f4f7fa;
+}
+
+.content {
+    flex: 1;
+    margin-left: 15rem; 
+    padding: 1rem 1rem 1rem 2.5rem;
+    overflow-y: auto;
+}
+
+.title {
+    font-size: 32px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.section {
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.sectionTitle {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #007bff;
+}
+
+.sectionDescription {
+    margin-bottom: 15px;
+    color: #555;
+}
+
+.list {
+    list-style-type: disc;
+    padding-left: 20px;
+}
+
+.faq {
+    margin: 10px 0;
+}
+
+.faq h4 {
+    margin: 5px 0;
+    color: #007bff;
+}
+
+.faq p {
+    margin: 0;
+    color: #555;
+}

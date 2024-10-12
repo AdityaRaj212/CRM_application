@@ -30,6 +30,18 @@ const Sidebar = ({activeComponent}) => {
         navigate('/documents');
         break;
 
+      case 'hierarchy':
+        navigate('/hierarchy');
+        break;
+
+      case 'help':
+        navigate('/help');
+        break;
+
+      case 'settings':
+        navigate('/settings');
+        break;
+
       default:
         navigate('/');
     }
@@ -70,7 +82,10 @@ const Sidebar = ({activeComponent}) => {
           <span className={styles.icon}>🖼️</span>
           <span className={styles.text}>Photos</span>
         </li>
-        <li className={styles.menuItem}>
+        <li
+          className={`${styles.menuItem} ${activeMenu === 'hierarchy' ? styles.active : ''}`}
+          onClick={() => handleMenuClick('hierarchy')}
+        >
           <span className={styles.icon}>📊</span>
           <span className={styles.text}>Hierarchy</span>
         </li>
@@ -82,11 +97,17 @@ const Sidebar = ({activeComponent}) => {
           <span className={styles.icon}>💬</span>
           <span className={styles.text}>Message</span>
         </li>
-        <li className={styles.menuItem}>
+        <li
+          className={`${styles.menuItem} ${activeMenu === 'help' ? styles.active : ''}`}
+          onClick={() => handleMenuClick('help')}
+        >
           <span className={styles.icon}>❓</span>
           <span className={styles.text}>Help</span>
         </li>
-        <li className={styles.menuItem}>
+        <li
+          className={`${styles.menuItem} ${activeMenu === 'settings' ? styles.active : ''}`}
+          onClick={() => handleMenuClick('settings')}
+        >
           <span className={styles.icon}>⚙️</span>
           <span className={styles.text}>Setting</span>
         </li>

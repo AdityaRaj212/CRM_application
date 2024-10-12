@@ -1,0 +1,96 @@
+/* HierarchyPage.module.css */
+.container {
+    display: flex;
+    background-color: white;
+    min-height: 100vh;
+    /* margin-left: 25rem; */
+}
+
+.content {
+    flex-grow: 1;
+    padding: 20px;
+}
+
+.hierarchyContainer {
+    text-align: center;
+}
+
+h1 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.tree {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.node {
+    position: relative;
+}
+
+.node div {
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin: 10px;
+    background-color: #e0e7ff;
+    transition: background-color 0.3s;
+    width: 150px;
+    text-align: center;
+}
+
+.node div:hover {
+    background-color: #cbd5e1;
+}
+
+.superAdmin {
+    background-color: #0B94FA;
+    color: white;
+}
+
+.hrAdmin {
+    background-color: #6B7280;
+    color: white;
+}
+
+.admin {
+    background-color: #4B5563;
+    color: white;
+}
+
+.employee {
+    background-color: #6EE7B7;
+    color: black;
+}
+
+.currentPosition {
+    border: 2px solid #0B94FA;
+}
+
+.dashboard {
+    display: flex;
+    background-color: #F5F5F5;
+    min-height: 100vh;
+  }
+  
+  .content {
+    margin-left: 15rem; /* Adjust this based on your sidebar width */
+    padding: 1rem 1rem 1rem 2.5rem;
+    flex: 1;
+  }
+  
+  .header {
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .sectionTitle {
+    color: #4985F6;
+  }
+  
+  .mainSection {
+    margin-top: 2rem;
+  }

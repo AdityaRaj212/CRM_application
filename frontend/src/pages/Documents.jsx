@@ -263,27 +263,77 @@ const Documents = () => {
         }
     };
 
-    const handlePreviewDocument = (documentId) => {
-        const previewUrl = `/api/documents/preview/${documentId}`;
-        window.open(previewUrl, '_blank'); // Open file in a new tab for preview
-    };
+    // const handlePreviewDocument = (documentId) => {
+    //     const previewUrl = `/api/documents/preview/${documentId}`;
+    //     window.open(previewUrl, '_blank'); // Open file in a new tab for preview
+    // };
+
+    // const handleDownloadDocument = async (documentId) => {
+    //     try {
+    //         const response = await axios.get(`/api/documents/download/${documentId}`, {
+    //             responseType: 'blob',
+    //         });
+    //         const url = window.URL.createObjectURL(new Blob([response.data]));
+    //         const link = document.createElement('a');
+    //         link.href = url;
+    //         link.setAttribute('download', 'document.pdf'); // Set file name based on actual file type
+    //         document.body.appendChild(link);
+    //         link.click();
+    //     } catch (error) {
+    //         console.error('Error downloading document:', error);
+    //         toast.error('Failed to download document.');
+    //     }
+    // };
 
     const handleDownloadDocument = async (documentId) => {
-        try {
-            const response = await axios.get(`/api/documents/download/${documentId}`, {
-                responseType: 'blob',
-            });
-            const url = window.URL.createObjectURL(new Blob([response.data]));
-            const link = document.createElement('a');
-            link.href = url;
-            link.setAttribute('download', 'document.pdf'); // Set file name based on actual file type
-            document.body.appendChild(link);
-            link.click();
-        } catch (error) {
-            console.error('Error downloading document:', error);
-            toast.error('Failed to download document.');
-        }
-    };
+      try {
+          const response = await axios.get(`/api/documents/download/${documentId}`, {
+              responseType: 'blob', // Important for binary files
+          });
+          const url = window.URL.createObjectURL(new Blob([response.data]));
+          const link = document.createElement('a');
+          link.href = url;
+          link.setAttribute('download', response.headers['content-disposition'].split('filename=')[1].replace(/"/g, '')); // Extract filename
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+      } catch (error) {
+          console.error('Error downloading document:', error);
+          toast.error('Failed to download document.');
+      }
+  };
+
+//   const handlePreviewDocument = async (documentId) => {
+//       try {
+//           const response = await axios.get(`/api/documents/preview/${documentId}`, {
+//               responseType: 'blob',
+//           });
+//           const url = window.URL.createObjectURL(new Blob([response.data]));
+//           const iframe = document.createElement('iframe');
+//           iframe.src = url;
+//           iframe.style.width = '100%';
+//           iframe.style.height = '100%';
+//           document.body.appendChild(iframe); // You might want to use a modal instead of appending to the body directly
+//       } catch (error) {
+//           console.error('Error previewing document:', error);
+//           toast.error('Failed to preview document.');
+//       }
+//   };
+
+const handlePreviewDocument = async (documentId) => {
+    try {
+        const response = await axios.get(`/api/documents/preview/${documentId}`, {
+            responseType: 'blob', // Important for binary files
+        });
+
+        const url = window.URL.createObjectURL(new Blob([response.data]));
+        window.open(url); // Open the file in a new tab
+    } catch (error) {
+        console.error('Error previewing document:', error);
+        toast.error('Failed to preview document.');
+    }
+};
+
 
     if (loading || loading2) {
         return <Loading/>

@@ -1,4 +1,6 @@
 import DocumentRepository from './document.repository.js';
+import path from 'path';
+import fs from 'fs';
 
 export default class DocumentController {
     constructor() {
@@ -48,7 +50,6 @@ export default class DocumentController {
                 filename: req.body.filename || currentDocument.filename,
                 fileType: req.body.fileType || currentDocument.fileType,
                 description: req.body.description || currentDocument.description,
-                // You can add logic to handle the file if provided
             };
 
             if (req.file) {
@@ -69,15 +70,54 @@ export default class DocumentController {
             if (!document) {
                 return res.status(404).json({ message: 'Document not found' });
             }
-            
-            const filePath = path.resolve(document.filePath); // Resolve the full path to the file
-            res.sendFile(filePath); // Send the file for preview
+
+            const normalizedPath = path.normalize(document.filePath); // Normalize the path
+            const filePath = path.resolve(normalizedPath); // Resolve the full path to the file
+
+            // Check if the file exists
+            if (!fs.existsSync(filePath)) {
+                return res.status(404).json({ message: 'File does not exist' });
+            }
+
+            // Set the Content-Type to application/pdf for PDF files
+            if (document.fileType === 'application/pdf') {
+                res.setHeader('Content-Type', 'application/pdf');
+            } else {
+                // Handle other file types accordingly
+                res.setHeader('Content-Type', document.fileType); 
+            }
+
+            // Send the file for preview
+            res.sendFile(filePath, (err) => {
+                if (err) {
+                    res.status(err.status).end();
+                }
+            });
         } catch (err) {
             res.status(500).json({ message: 'Error previewing document', error: err.message });
         }
     }
 
-    // Method for downloading a document
+    // Method to determine the content type based on file type
+    getContentType(fileType) {
+        switch (fileType) {
+            case 'application/pdf':
+                return 'application/pdf';
+            case 'image/jpeg':
+                return 'image/jpeg';
+            case 'image/png':
+                return 'image/png';
+            case 'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
+                return 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
+            case 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':
+                return 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
+            case 'application/vnd.openxmlformats-officedocument.presentationml.presentation':
+                return 'application/vnd.openxmlformats-officedocument.presentationml.presentation';
+            default:
+                return 'application/octet-stream'; // Fallback for unknown types
+        }
+    }
+
     async downloadDocument(req, res) {
         const { documentId } = req.params;
         try {
@@ -91,5 +131,5 @@ export default class DocumentController {
         } catch (err) {
             res.status(500).json({ message: 'Error downloading document', error: err.message });
         }
-    }
+    } 
 }

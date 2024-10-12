@@ -1,6 +1,7 @@
 import express from 'express';
 import UserController from './user.controller.js';
 import { authMiddleware } from '../../middlewares/auth.middleware.js';
+import { upload } from '../../middlewares/fileUpload.middleware.js';
 
 const userController = new UserController();
 const router = express.Router();
@@ -19,7 +20,7 @@ router.post('/oauth/google', (req, res) => userController.googleOAuth(req, res))
 
 router.get('/get-user-by-id/:userId', (req, res) => userController.findUserById(req, res));
 
-router.put('/:userId', (req, res) => userController.updateUser(req, res));
+router.put('/:userId', upload.single('profileImg'), (req, res) => userController.updateUser(req, res));
 
 router.delete('/:userId', (req, res) => userController.deleteUser(req, res));
 

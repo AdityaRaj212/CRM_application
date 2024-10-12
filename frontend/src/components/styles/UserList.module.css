@@ -1,4 +1,4 @@
-.container{
+.container {
   background-color: white;
   border-radius: 10px;
   padding-top: 1rem;
@@ -14,10 +14,9 @@
 .userTable td {
   border: none; /* Remove all borders */
   padding: 1rem;
-  /* text-align: left; */
 }
 
-.userTable td{
+.userTable td {
   margin: 0 1rem;
 }
 
@@ -32,7 +31,7 @@
   border-bottom: 1px solid #e5e5e5; /* Add bottom borders to rows */
 }
 
-.header{
+.header {
   font-size: 1.5rem;
   margin: 1rem;
 }
@@ -71,9 +70,28 @@
 
 .actionBtns {
   display: flex;
+  justify-content: space-around;
 }
 
 .actionBtns button {
   background: none;
   color: #888;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem; /* Add padding for better click area */
+  transition: background-color 0.3s, transform 0.2s; /* Transition for hover effects */
+  border-radius: 5px; /* Rounded corners */
+  margin: 0 5px; /* Spacing between buttons */
+}
+
+/* Add hover effects */
+.actionBtns button:hover {
+  background-color: #f0f0f0; /* Light background on hover */
+  color: #333; /* Darker text color on hover */
+  transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+/* Add icon styling */
+.actionBtns button svg {
+  font-size: 1.2rem; /* Adjust icon size */
 }

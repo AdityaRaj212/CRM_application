@@ -55,9 +55,12 @@
 }
 
 .profileSection {
+  height: 2rem;
   display: flex;
   align-items: center;
   cursor: pointer; 
+  border-left: 1px solid black;
+  padding-left: 0.5rem;
 }
 
 .profileAvatar img {
