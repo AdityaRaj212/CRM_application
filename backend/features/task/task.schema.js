@@ -6,7 +6,7 @@ const TaskSchema = new mongoose.Schema({
     assignedTo: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
     createdBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
     dueDate: { type: Date },
-    status: { type: String, enum: ['To-Do', 'In-progress', 'Completed'] },
+    status: { type: String, enum: ['To-Do', 'In-progress', 'Completed'], default: 'To-Do' },
     comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Message' }],
     attachments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Document' }],
 

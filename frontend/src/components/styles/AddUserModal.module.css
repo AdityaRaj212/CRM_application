@@ -164,3 +164,58 @@ input[type="checkbox"]:checked + .checkboxLabel:after {
   scrollbar-width: thin; /* Make scrollbar thin */
   scrollbar-color: #0B94FA #f1f1f1; /* Thumb and track colors */
 }
+
+/* AddUserModal.module.css */
+
+.inputField {
+  width: 100%;
+  padding: 12px 15px;
+  border: 2px solid #e0e0e0; /* Light gray border */
+  border-radius: 8px; /* Rounded corners */
+  background-color: #f9f9f9; /* Light background */
+  font-size: 16px; /* Font size */
+  color: #333; /* Text color */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for focus */
+  margin: 0.5rem;
+}
+
+.inputField:focus {
+  border-color: #007bff; /* Change border color on focus */
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Light blue shadow effect */
+  outline: none; /* Remove outline */
+}
+
+.inputField::placeholder {
+  color: #aaa; /* Placeholder text color */
+  opacity: 1; /* Ensure placeholder is visible */
+}
+
+/* Optional: Style for mobile responsiveness */
+@media (max-width: 600px) {
+  .inputField {
+    font-size: 14px; /* Smaller font size for smaller screens */
+  }
+}
+
+.addUserButton {
+  background-color: #007BFF; /* Primary color */
+  color: white; /* Text color */
+  border: none; /* No border */
+  border-radius: 5px; /* Slightly rounded corners */
+  padding: 10px 20px; /* Padding for top/bottom and left/right */
+  font-size: 16px; /* Font size */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s, transform 0.3s; /* Smooth transition for background color and scale */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.addUserButton:hover {
+  background-color: #0056b3; /* Darker shade on hover */
+  transform: translateY(-2px); /* Slight lift effect */
+}
+
+.addUserButton:active {
+  transform: translateY(0); /* Reset lift effect on click */
+}
+
+

@@ -1,133 +1,140 @@
-/* Container for the entire login section */
-.loginContainer {
+/* Overall page styling */
+.pageContainer {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    background-color: #f5f5f5; /* Light background color */
+    position: relative;
+    padding: 0 20px;
 }
 
-/* Card style for the login form */
-.loginCard {
-    background-color: white;
-    padding: 40px;
-    border-radius: 15px;
-    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
+/* Card style for login form */
+.formWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* align-items: center; */
+    background-color: #ffffff; /* White background for the form */
+    padding: 40px 30px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     width: 100%;
     max-width: 400px;
     text-align: center;
-    position: relative;
-    z-index: 1;
 }
 
-/* Styling the form headings */
-h2 {
+/* Company name styling */
+.companyName {
     margin-bottom: 20px;
-    font-size: 28px;
+    font-size: 36px;
+    font-weight: bold;
+    color: #0052cc; /* Color for the company name */
+}
+
+/* Header styling for the form */
+.formHeader h2 {
+    margin-bottom: 8px;
+    font-size: 24px;
     color: #333;
-    font-weight: 700;
-    letter-spacing: 1px;
 }
 
-/* Form styles */
-.form {
+.formHeader p {
     margin-bottom: 20px;
+    color: #777;
+    font-size: 14px;
+}
+
+/* Form input styling */
+.form {
     display: flex;
     flex-direction: column;
-    align-items: center;
 }
 
 .input {
-    width: 100%;
-    padding: 15px;
+    /* width: 100%; */
+    padding: 14px;
     margin: 10px 0;
     border: 1px solid #ddd;
-    border-radius: 8px;
+    border-radius: 6px;
     font-size: 16px;
-    background-color: #f4f4f4;
-    transition: border-color 0.3s ease, background-color 0.3s ease;
+    background-color: #fafafa;
+    transition: all 0.2s ease-in-out;
 }
 
 .input:focus {
-    border-color: #f093fb;
+    border-color: #007bff;
     background-color: #fff;
     outline: none;
 }
 
-/* Submit buttons for login and signup */
-.button {
+/* Submit button styling */
+.submitButton {
     width: 100%;
-    padding: 15px;
-    background-color: #f093fb;
+    padding: 14px;
+    background-color: #007bff;
     color: white;
     border: none;
-    border-radius: 8px;
+    border-radius: 6px;
     font-size: 16px;
-    font-weight: bold;
+    font-weight: 600;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
-.button:hover {
-    background-color: #f5576c;
+.submitButton:hover {
+    background-color: #0056b3;
 }
 
-/* Toggle between login and signup */
-.toggleText {
-    margin: 15px 0;
+/* Auth toggle */
+.authToggle {
+    margin-top: 20px;
     font-size: 14px;
-    color: #666;
+    color: #777;
 }
 
-.toggleButton {
-    color: #f093fb;
+.authToggle p {
+    display: inline;
+}
+
+.toggleLink {
+    color: #007bff;
+    font-weight: 600;
     cursor: pointer;
-    font-weight: bold;
 }
 
-.toggleButton:hover {
+.toggleLink:hover {
     text-decoration: underline;
 }
 
 /* Google login button */
+.googleAuth {
+    margin-top: 30px;
+}
+
+.googleAuth p {
+    font-size: 14px;
+    color: #777;
+}
+
 .googleButton {
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 12px;
-    background-color: white;
-    border: 2px solid #ddd;
-    border-radius: 8px;
-    font-size: 16px;
-    color: #444;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 6px;
     cursor: pointer;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
-    margin-top: 20px;
+    transition: all 0.3s ease;
 }
 
 .googleButton:hover {
-    background-color: #f4f4f4;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #f0f0f0;
 }
 
 .googleButton img {
     margin-right: 10px;
     width: 20px;
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .loginCard {
-        padding: 30px;
-        width: 90%;
-    }
-
-    .input, .button {
-        font-size: 14px;
-        padding: 12px;
-    }
-
-    h2 {
-        font-size: 22px;
-    }
+    height: 20px;
 }

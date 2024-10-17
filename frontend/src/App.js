@@ -13,6 +13,9 @@ import { ToastContainer } from 'react-toastify';
 import Hierarchy from './pages/Hierarchy';
 import Help from './pages/Help';
 import Settings from './pages/Settings';
+import PasswordChange from './components/PasswordChange';
+import Login2 from './pages/Login2.tsx';
+import NotFound from './components/NotFound.jsx';
 
 function App() {
   return (
@@ -21,13 +24,16 @@ function App() {
       <ToastContainer/>
         <Routes>
           <Route path='/' element={<Dashboard/>} />
-          <Route path='/auth' element = {<Login/>} />
+          <Route path='/auth' element = {<Login2/>} />
+          {/* <Route path='/auth' element = {<Login/>} /> */}
           <Route path='/admin' element = {<AdminDashboard/>} />
           <Route path='/users' element = {<Users/>} />
           <Route path='/documents' element = {<Documents/>} />
           <Route path='/hierarchy' element = {<Hierarchy/>} />
           <Route path='/help' element = {<Help/>} />
           <Route path='/settings' element = {<Settings/>} />
+          <Route path='/change-password' element = {<PasswordChange/>} />
+          <Route path='*' element={<NotFound/>} />
         </Routes>
       </Router>
     </AuthProvider>

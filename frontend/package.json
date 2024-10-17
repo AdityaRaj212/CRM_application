@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@react-oauth/google": "^0.12.1",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -20,6 +21,7 @@
     "react-scripts": "5.0.1",
     "react-toastify": "^10.0.5",
     "react-treebeard": "^3.2.4",
+    "tw-elements-react": "^1.0.0-alpha-end",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -46,5 +48,8 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:5000"
+  "proxy": "http://localhost:5000",
+  "devDependencies": {
+    "typescript": "^4.9.5"
+  }
 }

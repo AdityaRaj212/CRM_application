@@ -9,6 +9,7 @@ import Modal from 'react-modal';
 import { useAuth } from '../context/AuthContext';
 import Loading from '../components/Loading';
 import axios from 'axios';
+import PasswordChangeModal from '../modals/PasswordChangeModal';
 
 const Settings = () => {
     const {user, loading} = useAuth();
@@ -20,6 +21,15 @@ const Settings = () => {
     const [password, setPassword] = useState('');
     const [profileImg, setProfileImg] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [showModal, setShowModal] = useState(false);
+
+    const openModal = () => {
+        setShowModal(true);
+    };
+
+    const closeModal = () => {
+        setShowModal(false);
+    };
 
     useEffect(() => {
         if (user) {
@@ -120,6 +130,10 @@ const Settings = () => {
                                         onChange={handleFileChange} 
                                     />
                                 </div>
+                                {/* <button className={styles.changePasswordButton} onClick={openModal}>
+                                    Change Password
+                                </button>
+                                {showModal && <PasswordChangeModal closeModal={closeModal} />} */}
                                 <button type="submit" className={styles.saveButton}>Save Changes</button>
                             </form>
                         </div>

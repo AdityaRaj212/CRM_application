@@ -1,0 +1,93 @@
+/* src/NotFound.module.css */
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #1e1e2f;
+    color: #f0f0f0;
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.errorCode {
+    font-size: 8rem;
+    font-weight: bold;
+    color: #ff4757;
+    text-shadow: 0 0 20px rgba(255, 71, 87, 0.7);
+}
+
+.errorMessage {
+    font-size: 2rem;
+    margin: 0.5rem 0;
+}
+
+.errorDescription {
+    font-size: 1.2rem;
+    margin: 1rem 0;
+    max-width: 400px;
+}
+
+.homeButton {
+    margin-top: 1rem;
+    padding: 10px 20px;
+    background-color: #ff4757;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 1.1rem;
+    transition: background-color 0.3s;
+}
+
+.homeButton:hover {
+    background-color: #ff6b81;
+}
+
+.techDesign {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}
+
+.circuit {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    animation: rotate 10s infinite linear;
+}
+
+.circuit:nth-child(1) {
+    top: -100px;
+    left: -100px;
+    opacity: 0.2;
+}
+
+.circuit:nth-child(2) {
+    top: -50px;
+    left: -50px;
+    opacity: 0.4;
+}
+
+.circuit:nth-child(3) {
+    top: 0;
+    left: 0;
+    opacity: 0.6;
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
