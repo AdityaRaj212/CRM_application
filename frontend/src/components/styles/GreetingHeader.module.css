@@ -8,7 +8,7 @@
   margin-bottom: 1rem;
   border-bottom: 1px solid #ddd; /* Subtle border for separation */
   border-radius: 10px;
-  position: relative; /* Make position relative for absolute dropdown */
+  position: relative;
 }
 
 .greeting {

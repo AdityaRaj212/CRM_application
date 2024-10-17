@@ -23,6 +23,7 @@ const TaskSection = ({ userId }) => {
     comments: [],
     file: null
   });
+  const token = localStorage.getItem('token');
 
   useEffect(() => {
     const fetchTasks = async () => {
@@ -273,6 +274,37 @@ const TaskSection = ({ userId }) => {
     return styles.defaultDate;
   };
 
+  const handleDeleteTask = async (taskId, category) => {
+    try {
+      const response = await axios.delete(`/api/tasks/delete/${taskId}`);
+  
+      console.log(response);
+
+      if (!response.data.status) {
+        toast.error('Failed to delete the task');
+        throw new Error('Failed to delete the task');
+      }
+  
+      setTasks((prevTasks) => {
+        return {
+          ...prevTasks,
+          [category]: Array.isArray(prevTasks[category]) 
+            ? prevTasks[category].filter(task => task.id !== taskId)
+            : []
+        };
+      });
+      setIsModalOpen(false);
+
+  
+      console.log('Task deleted successfully');
+      toast.success('Task deleted successfully');
+    } catch (err) {
+      console.error('Error deleting task:', err);
+      toast.error('Failed to delete the task. Please try again.');
+    }
+  }
+  
+
   return (
     <div className={styles.taskSection}>
       <ToastContainer /> {/* Toast container for notifications */}
@@ -404,6 +436,21 @@ const TaskSection = ({ userId }) => {
             <p>{selectedTask.comments.length} Comments</p>
             <h3>Attachments</h3>
             <p>{selectedTask.attachments?.length} Attachments</p>
+            <div className={styles.modalFooter}>
+              <button onClick={()=>{
+                if(selectedTask.status==='To-Do'){
+                  handleDeleteTask(selectedTask._id, 'todo');        // Deletes task from todo list
+                }
+                if(selectedTask.status==='In-progress'){
+                  handleDeleteTask(selectedTask._id, 'inProgress');  // Deletes task from inProgress list
+                }
+                if(selectedTask.status==='Completed'){
+                  handleDeleteTask(selectedTask._id, 'done');        // Deletes task from done list
+                }
+              }} className={styles.deleteBtn}>
+                Delete
+              </button>
+            </div>
           </div>
         )}
       </Modal>

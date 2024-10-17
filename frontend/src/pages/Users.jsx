@@ -32,6 +32,9 @@ const Users = () => {
   useEffect(() => {
     const fetchDetails = async () => {
       try {
+        if(user){
+          setUserName(user.firstName);
+        }
         const response = await axios.get('/api/users'); // Adjust this endpoint
         setUsers(response.data.users); // Set users from API response
         setFilteredUsers(response.data.users); // Initialize filtered users

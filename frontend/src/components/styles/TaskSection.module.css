@@ -171,6 +171,29 @@
   overflow-y: auto;
 }
 
+.editBtn {
+  background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%); /* Gradient for a modern look */
+  color: white; /* White text for contrast */
+  border: none; /* Remove the border */
+  border-radius: 10px; /* Rounded corners */
+  padding: 0.75rem 1.5rem; /* Adjust padding for a larger button */
+  font-size: 16px; /* Slightly larger font */
+  font-weight: bold; /* Bold text for emphasis */
+  cursor: pointer; /* Pointer cursor to indicate clickable button */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for a lifted effect */
+  transition: transform 0.2s ease, box-shadow 0.2s ease; /* Smooth transition for hover effects */
+}
+
+.editBtn:hover {
+  transform: translateY(-3px); /* Slight lift on hover */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Slightly deeper shadow on hover */
+}
+
+.editBtn:active {
+  transform: translateY(0); /* Return to normal on click */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Reduce shadow depth */
+}
+
 .taskDetails h2 {
   font-size: 24px;
   margin-bottom: 10px;
@@ -222,9 +245,13 @@
   justify-content: space-between;
   padding: 10px;
   border-radius: 10px;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   cursor: pointer;
+}
+
+.checkpoint:hover{
+  transform: translateY(-3px);
 }
 
 .checked {
@@ -306,6 +333,34 @@
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   border: 2px dashed rgb(246, 246, 246);
 }
+
+.modalFooter{
+  display: flex;
+  justify-content: center;
+}
+
+.deleteBtn {
+  width: 100%;
+  background-color: #f44336; /* Red background for delete action */
+  color: white; /* White text color */
+  border: none; /* Remove default border */
+  border-radius: 5px; /* Rounded corners */
+  padding: 10px 15px; /* Padding for better click area */
+  font-size: 14px; /* Font size */
+  font-weight: bold; /* Bold text for emphasis */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transition for hover effects */
+}
+
+.deleteBtn:hover {
+  background-color: #c62828; /* Darker red on hover */
+  transform: scale(1.05); /* Slightly increase size on hover */
+}
+
+.deleteBtn:active {
+  transform: scale(0.95); /* Slightly decrease size when clicked */
+}
+
 
 .header {
   display: flex;
