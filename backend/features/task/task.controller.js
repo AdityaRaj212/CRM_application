@@ -47,11 +47,17 @@ export default class TaskController {
             attachments: []
           };
 
+          console.log('file:', req.file);
+
+          const fileDescription =  `File of task - ${name}`;
+
           if (req.file) {
             const documentData = {
             userId: assignedTo,
             filename: req.file.originalname,
             filePath: req.file.path,
+            fileType: req.file.mimetype,
+            description: fileDescription
           };
       
             // Save the document and get the document ID

@@ -12,8 +12,8 @@ const UserList = ({ users, onDeleteUser, onUpdateUser }) => {
   const [currentUser, setCurrentUser] = useState(null); // State to hold user being edited
 
   const handleEdit = (user) => {
-    setCurrentUser(user); // Set the user data to edit
-    setModalOpen(true); // Open modal
+    setCurrentUser(user); 
+    setModalOpen(true); 
   };
 
   const handleDelete = async (userId) => {

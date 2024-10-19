@@ -19,7 +19,11 @@ const Sidebar = ({activeComponent}) => {
     setActiveMenu(menu); // Set the active menu
     switch(menu){
       case 'dashboard':
-        navigate('/admin');
+        if(userPosition==='Employee'){
+          navigate('/');
+        }else{
+          navigate('/admin');
+        }
         break;
       
       case 'users':

@@ -239,6 +239,12 @@
   margin-top: 1rem;
 }
 
+.checkpoints{
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0.5rem;
+}
+
 .checkpoint {
   display: flex;
   align-items: center;
@@ -341,15 +347,15 @@
 
 .deleteBtn {
   width: 100%;
-  background-color: #f44336; /* Red background for delete action */
-  color: white; /* White text color */
-  border: none; /* Remove default border */
-  border-radius: 5px; /* Rounded corners */
-  padding: 10px 15px; /* Padding for better click area */
-  font-size: 14px; /* Font size */
-  font-weight: bold; /* Bold text for emphasis */
-  cursor: pointer; /* Pointer cursor on hover */
-  transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transition for hover effects */
+  background-color: #f44336; 
+  color: white;
+  border: none; 
+  border-radius: 5px; 
+  padding: 10px 15px; 
+  font-size: 14px; 
+  font-weight: bold; 
+  cursor: pointer; 
+  transition: background-color 0.3s ease, transform 0.2s ease; 
 }
 
 .deleteBtn:hover {
@@ -396,18 +402,20 @@
 }
 
 .inputField {
-  width: 100%;
+  width: 95%;
   padding: 10px;
-  margin-bottom: 15px;
+  /* margin-bottom: 15px; */
+  margin: 0.5rem;
   border: 1px solid #e5e5e5;
   border-radius: 5px;
 }
 
 .textAreaField {
-  width: 100%;
+  width: 95%;
   padding: 10px;
   height: 80px;
-  margin-bottom: 15px;
+  /* margin-bottom: 15px; */
+  margin: 0.5rem;
   border: 1px solid #e5e5e5;
   border-radius: 5px;
 }
@@ -436,7 +444,8 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  margin-left: 10px;
+  /* margin-left: 10px; */
+  margin: 0.5rem; 
 }
 
 .addCheckpointBtn:hover, .removeCheckpointBtn:hover {

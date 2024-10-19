@@ -89,7 +89,7 @@ const AddUserModal = ({ isOpen, onRequestClose, user }) => {
       <form className={styles.form} onSubmit={handleSubmit}>
         {user && (
           <div className={styles.type1}>
-            <input type="text" value={user?.empId || ''} readOnly placeholder='User ID *' />
+            <input className={styles.inputField} type="text" value={user?.empId || ''} readOnly placeholder='User ID *' />
           </div>
         )}
         <div className={styles.name}>

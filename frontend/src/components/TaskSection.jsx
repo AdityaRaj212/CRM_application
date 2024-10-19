@@ -160,7 +160,18 @@ const TaskSection = ({ userId }) => {
 
     if (newTask.file) {
       formData.append('file', newTask.file);
+      console.log(newTask.file);
+      formData.append('fileType', newTask.file.type);
+      console.log(newTask.file.type);
     }
+
+    const description = `File uploaded for task - ${newTask.name}`;
+
+    const fileUploadFormData = new FormData();
+    fileUploadFormData.append('userId', userId);
+    fileUploadFormData.append('filename', newTask.file.name);
+    fileUploadFormData.append('file', newTask.file);
+    fileUploadFormData.append('description', description);
 
     try {
       const response = await axios.post('/api/tasks/add', formData, {
@@ -168,6 +179,12 @@ const TaskSection = ({ userId }) => {
           'Content-Type': 'multipart/form-data',
         }
       });
+
+    //   await axios.post('/api/documents/upload', fileUploadFormData, {
+    //     headers: {
+    //         'Content-Type': 'multipart/form-data',
+    //     },
+    //  });
       toast.success('Task added successfully!');
 
       setTasks((prevTasks) => ({
@@ -182,6 +199,35 @@ const TaskSection = ({ userId }) => {
       // toast.error('Failed to add task.');
     }
   };
+
+  const handleDeleteTask = async (taskId, category) => {
+    try {
+      const response = await axios.delete(`/api/tasks/delete/${taskId}`);
+  
+      console.log(response);
+
+      if (!response.data.status) {
+        toast.error('Failed to delete the task');
+        throw new Error('Failed to delete the task');
+      }
+  
+      setTasks((prevTasks) => {
+        return {
+          ...prevTasks,
+          [category]: Array.isArray(prevTasks[category]) 
+            ? prevTasks[category].filter(task => task._id !== taskId)
+            : []
+        };
+      });
+      setIsModalOpen(false);
+
+      console.log('Task deleted successfully');
+      toast.success('Task deleted successfully');
+    } catch (err) {
+      console.error('Error deleting task:', err);
+      toast.error('Failed to delete the task. Please try again.');
+    }
+  }
 
   const toggleCheckpoint = async (index) => {
     if (!isEditMode){
@@ -273,36 +319,6 @@ const TaskSection = ({ userId }) => {
     if (daysDiff <= 2 && daysDiff >= 0) return styles.orangeDate;
     return styles.defaultDate;
   };
-
-  const handleDeleteTask = async (taskId, category) => {
-    try {
-      const response = await axios.delete(`/api/tasks/delete/${taskId}`);
-  
-      console.log(response);
-
-      if (!response.data.status) {
-        toast.error('Failed to delete the task');
-        throw new Error('Failed to delete the task');
-      }
-  
-      setTasks((prevTasks) => {
-        return {
-          ...prevTasks,
-          [category]: Array.isArray(prevTasks[category]) 
-            ? prevTasks[category].filter(task => task.id !== taskId)
-            : []
-        };
-      });
-      setIsModalOpen(false);
-
-  
-      console.log('Task deleted successfully');
-      toast.success('Task deleted successfully');
-    } catch (err) {
-      console.error('Error deleting task:', err);
-      toast.error('Failed to delete the task. Please try again.');
-    }
-  }
   
 
   return (
@@ -310,7 +326,7 @@ const TaskSection = ({ userId }) => {
       <ToastContainer /> {/* Toast container for notifications */}
       <div className={`${styles.column} ${styles.todo}`}>
         <div className={styles.header}>
-          <h3>To Do</h3>
+          <h3>To Do ({tasks.todo.length})</h3>
           <button onClick={openTaskModal} className={styles.addTaskBtn}>+ Add Task</button>
         </div>
         {tasks.todo.map(renderTaskCard)}
@@ -318,14 +334,14 @@ const TaskSection = ({ userId }) => {
 
       <div className={`${styles.column} ${styles.inProgress}`}>
         <div className={styles.header}>
-          <h3>In Progress</h3>
+          <h3>In Progress ({tasks.inProgress.length})</h3>
         </div>
         {tasks.inProgress.map(renderTaskCard)}
       </div>
 
       <div className={`${styles.column} ${styles.done}`}>
         <div className={styles.header}>
-          <h3>Completed</h3>
+          <h3>Completed ({tasks.done.length})</h3>
         </div>
         {tasks.done.map(renderTaskCard)}
       </div>
@@ -365,7 +381,7 @@ const TaskSection = ({ userId }) => {
           <select name="assignedTo" value={newTask.assignedTo} onChange={handleTaskInputChange} className={styles.inputField}>
             <option value="">Assign to User</option>
             {users.map(user => (
-              <option key={user._id} value={user._id}>{user.name}</option>
+              <option key={user._id} value={user._id}>{user.firstName + ' ' + user.lastName}</option>
             ))}
           </select>
 
@@ -388,7 +404,7 @@ const TaskSection = ({ userId }) => {
 
           <div className={styles.fileUpload}>
             <label htmlFor="file">Attach File</label>
-            <input type="file" id="file" name="file" onChange={handleFileChange} />
+            <input className={styles.inputField} type="file" id="file" name="file" onChange={handleFileChange} />
           </div>
 
           <button onClick={addTask} className={styles.saveTaskBtn}>Create Task</button>
