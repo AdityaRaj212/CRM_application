@@ -79,4 +79,14 @@ export default class CandidateController {
             res.status(500).json({ message: 'Error fetching candidate sources', error: error.message });
         }
     }
+
+    async getCandidateStatusCounts(req, res) {
+        try {
+            const result = await this.candidateRepository.getCandidateStatusCounts();
+            res.status(200).json(result);
+        } catch (error) {
+            console.error('Error fetching candidate status counts:', error);
+            res.status(500).json({ message: 'Internal server error' });
+        }
+    }
 }

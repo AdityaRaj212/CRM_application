@@ -1,0 +1,23 @@
+.profileCircle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem; 
+    height: 2rem;
+    border-radius: 50%;
+    font-size: 24px; /* Adjust the font size as needed */
+    color: white; /* Text color */
+    font-weight: bold;
+    transition: transform 0.2s, box-shadow 0.2s; /* Add a hover effect */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Add a shadow for depth */
+    margin: 0.5rem;
+}
+
+.profileCircle:hover {
+    transform: scale(1.1); /* Slightly enlarge on hover */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Increase shadow on hover */
+}
+
+.initial {
+    user-select: none; /* Prevent text selection */
+}

@@ -12,6 +12,8 @@ router.get('/sources', (req, res) => candidateController.getCandidateSources(req
 
 router.get('/statistics', (req, res) => candidateController.getCandidateStatistics(req, res));
 
+router.get('/status-counts', (req, res) => candidateController.getCandidateStatusCounts(req, res));
+
 router.get('/:candidateId', (req, res) => candidateController.getCandidateById(req, res));
 
 router.put('/:candidateId', (req, res) => candidateController.updateCandidate(req, res));

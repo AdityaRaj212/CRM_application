@@ -1,0 +1,100 @@
+/* CreateVacancy.module.css */
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5); /* Dim the background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal {
+    background: white;
+    padding: 30px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    width: 400px; /* Adjust width as needed */
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.modal h2 {
+    margin: 0 0 20px;
+    font-weight: 600; /* Make the title bold */
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+}
+
+.formGroup {
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.formGroup label {
+    margin-bottom: 5px;
+    font-weight: 500; /* Slightly bold labels */
+}
+
+.formGroup input {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px; /* More rounded corners */
+    transition: border-color 0.3s, box-shadow 0.3s; /* Smooth transitions */
+    font-size: 14px; /* Font size */
+}
+
+.formGroup input:focus {
+    border-color: #6772e5; /* Highlight on focus */
+    outline: none;
+    box-shadow: 0 0 5px rgba(103, 114, 229, 0.5); /* Add shadow on focus */
+}
+
+.buttonContainer {
+    display: flex;
+    justify-content: space-between;
+}
+
+.submitButton, .cancelButton {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.submitButton {
+    background-color: #6772e5;
+    color: white;
+}
+
+.submitButton:hover {
+    background-color: #5a62d0; /* Darker shade on hover */
+}
+
+.cancelButton {
+    background-color: #f44336; /* Red for cancel */
+    color: white;
+}
+
+.cancelButton:hover {
+    background-color: #e53935; /* Darker shade on hover */
+}

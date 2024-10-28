@@ -87,8 +87,12 @@ const Dashboard = () => {
     return <Loading/>;
   }
 
-  if(user && user.position!='Employee'){
+  if(user && (user.position==='Admin' || user.position==='Super Admin')){
     navigate('/admin');
+  }
+
+  if(user && user.position==='HR Admin'){
+    navigate('/hr');
   }
 
   return (

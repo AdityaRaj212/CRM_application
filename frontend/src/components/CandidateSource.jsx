@@ -29,7 +29,6 @@ const CandidateSource = () => {
     const fetchCandidateSources = async () => {
         try {
             const response = await axios.get('/api/candidates/sources'); // Use Axios
-            console.log('Sources: ', response.data);
             setSources(response.data);
         } catch (error) {
             console.error('Error fetching candidate sources:', error);

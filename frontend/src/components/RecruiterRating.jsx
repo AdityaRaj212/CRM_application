@@ -4,6 +4,7 @@ import styles from './styles/RecruiterRating.module.css';
 import { useAuth } from '../context/AuthContext';
 import Loading from './Loading';
 import PulseLoader from 'react-spinners/PulseLoader'; // Import PulseLoader from react-spinners
+import UserProfileCircle from './UserProfileCircle';
 
 const RecruiterRating = () => {
     const { loading } = useAuth();
@@ -78,14 +79,20 @@ const RecruiterRating = () => {
                 <tbody>
                     {ratings.map((recruiter) => (
                         <tr key={recruiter.id}>
-                            <td>{recruiter.name}</td>
+                            {/* <td>{<UserProfileCircle user={recruiter}/>}</td> */}
+                            {/* <td>{recruiter.name}</td> */}
+                            <td className={styles.recruiter}>
+                                <UserProfileCircle user={{ firstName: recruiter.name.split(' ')[0], lastName: recruiter.name.split(' ')[1] }} />
+                                {recruiter.name}
+                            </td>
                             <td>{recruiter.activeVacancies}</td>
                             <td>{recruiter.responses}</td>
                             <td>
-                                {recruiter.hired} | {recruiter.activeVacancies} 
+                                {recruiter.hired}
+                                {/* {recruiter.hired} | {recruiter.activeVacancies} 
                                 <div className={styles.progressBar}>
                                     <div style={{ width: `${(recruiter.hired / recruiter.activeVacancies) * 100}%` }} className={styles.progressFill}></div>
-                                </div>
+                                </div> */}
                             </td>
                         </tr>
                     ))}

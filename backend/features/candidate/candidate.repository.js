@@ -64,4 +64,37 @@ export default class CandidateRepository {
             }
         ]);
     }
+
+    async getCandidateStatusCounts() {
+        const candidates = await this.getAllCandidates();
+
+        const totalCandidates = candidates.length;
+
+        // Initialize counts
+        const statusCounts = {
+            Applied: 0,
+            Interviewed: 0,
+            Hired: 0,
+            Rejected: 0,
+        };
+
+        // Count candidates by status
+        candidates.forEach(candidate => {
+            statusCounts[candidate.status]++;
+        });
+
+        // Calculate percentages
+        const statusPercentages = {
+            Applied: totalCandidates ? ((statusCounts.Applied / totalCandidates) * 100).toFixed(2) : 0,
+            Interviewed: totalCandidates ? ((statusCounts.Interviewed / totalCandidates) * 100).toFixed(2) : 0,
+            Hired: totalCandidates ? ((statusCounts.Hired / totalCandidates) * 100).toFixed(2) : 0,
+            Rejected: totalCandidates ? ((statusCounts.Rejected / totalCandidates) * 100).toFixed(2) : 0,
+        };
+
+        return {
+            statusCounts,
+            statusPercentages,
+            totalCandidates,
+        };
+    }
 }

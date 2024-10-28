@@ -1,0 +1,88 @@
+.container {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 45%;
+    margin-bottom: 1rem;
+}
+
+/* .container {
+    padding: 20px;
+    background-color: #f8f9fc;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+} */
+
+h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #343a40;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Two equal columns */
+    gap: 20px; /* Space between the cards */
+}
+
+.card {
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+    margin-right: 15px; /* Space between profile image and name */
+}
+
+.profileImage {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.initials {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #6772e5; /* Default color */
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.info {
+    flex-grow: 1; /* Allow the info section to take remaining space */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.name {
+    font-size: 18px;
+    font-weight: bold;
+    color: #343a40;
+}
+
+.closingTime {
+    font-size: 16px;
+    background-color: rgb(240,247,254);
+    color: rgb(0,146,246); /* Blue color for days */
+    padding: 1rem;
+    border-radius: 10px;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

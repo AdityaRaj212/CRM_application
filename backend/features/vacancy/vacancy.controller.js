@@ -1,3 +1,4 @@
+import { UserModel } from '../user/user.schema.js';
 import VacancyRepository from './vacancy.repository.js';
 
 export default class VacancyController {
@@ -7,7 +8,8 @@ export default class VacancyController {
 
     async createVacancy(req, res) {
         try {
-            const vacancyData = { ...req.body, createdBy: req.user.userId };
+            const vacancyData = { ...req.body, creationDate: Date.now(), status: 'open', applicants: [], hired: [] };
+            // const vacancyData = { ...req.body, createdBy: req.user.userId };
             const vacancy = await this.vacancyRepository.createVacancy(vacancyData);
             res.status(201).json({ message: 'Vacancy created successfully', vacancy });
         } catch (error) {
@@ -108,6 +110,26 @@ export default class VacancyController {
         } catch (error) {
             console.error('Error fetching vacancies by user ID:', error);
             res.status(500).json({ message: 'Error fetching vacancies', error: error.message });
+        }
+    }
+
+    async getAverageClosingTime(req, res) {
+        try {
+            const averageClosingTimes = await this.vacancyRepository.getAverageClosingTimeByRecruiter();
+            const recruitersWithInfo = await Promise.all(
+                averageClosingTimes.map(async (vacancy) => {
+                    const recruiter = await UserModel.findById(vacancy._id);
+                    return {
+                        recruiterId: vacancy._id,
+                        recruiterInfo: recruiter,
+                        averageClosingTime: vacancy.averageClosingTime/(3600*24*1000)
+                    };
+                })
+            );
+
+            res.status(200).json(recruitersWithInfo);
+        } catch (error) {
+            res.status(500).json({ message: error.message });
         }
     }
 }

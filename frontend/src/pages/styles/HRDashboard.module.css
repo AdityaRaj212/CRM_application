@@ -30,6 +30,7 @@
     width:100%;
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-between;
     /* justify-content: space-evenly; */
   }
   
@@ -39,7 +40,7 @@
     padding: 20px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     text-align: center;
-    width: 25%;
+    width: 15%;
   }
   
   .statCard h3 {
@@ -61,4 +62,51 @@
     color: red;
   }
   /* Additional styling for components can be added here */
+
+  .progressBar {
+    background-color: #e0e0e0;
+    border-radius: 5px;
+    height: 8px;
+    margin-top: 5px;
+}
+
+.progressFill {
+    background-color: rgb(5,145,250);
+    height: 100%;
+    border-radius: 5px;
+}
+
+/* Add these styles to HRDashboard.module.css */
+.createVacancyButton {
+  background-color: #6772e5; /* Primary color */
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px; /* Rounded corners */
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transition */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  margin-bottom: 20px; /* Space below the button */
+}
+
+.createVacancyButton:hover {
+  background-color: #5a62d0; /* Darker shade on hover */
+  transform: translateY(-2px); /* Lift effect */
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2); /* Increased shadow on hover */
+}
+
+.createVacancyButton:focus {
+  outline: none; /* Remove default outline */
+  box-shadow: 0 0 0 4px rgba(103, 114, 229, 0.5); /* Add focus outline */
+}
+
+.create{
+  display: flex;
+  /* border: 2px solid red; */
+  width: 100%;
+  flex-direction: row-reverse;
+}
+
   

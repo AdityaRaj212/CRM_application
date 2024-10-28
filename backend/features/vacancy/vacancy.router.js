@@ -6,10 +6,12 @@ const vacancyRouter = express.Router();
 const vacancyController = new VacancyController();
 
 // Route for creating a vacancy
-vacancyRouter.post('/', authMiddleware, (req, res) => vacancyController.createVacancy(req, res));
+vacancyRouter.post('/', (req, res) => vacancyController.createVacancy(req, res));
 
 // Route for fetching all vacancies
 vacancyRouter.get('/', (req, res) => vacancyController.getAllVacancies(req, res));
+
+vacancyRouter.get('/average-closing-time', (req, res) => vacancyController.getAverageClosingTime(req, res));
 
 // Route for fetching a vacancy by ID
 vacancyRouter.get('/:vacancyId', (req, res) => vacancyController.getVacancyById(req, res));
@@ -25,5 +27,6 @@ vacancyRouter.get('/count/open', (req, res) => vacancyController.getOpenVacancie
 vacancyRouter.get('/count/applications', (req, res) => vacancyController.getTotalApplicationsCount(req, res));
 vacancyRouter.get('/count/hired', (req, res) => vacancyController.getHiredEmployeesCount(req, res));
 vacancyRouter.get('/user/:userId', (req, res) => vacancyController.getVacanciesByUserId(req, res));
+
 
 export default vacancyRouter;

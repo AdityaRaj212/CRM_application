@@ -53,4 +53,25 @@ export default class VacancyRepository {
     //         .populate('hired', 'firstName lastName')
     //         .populate('applicants');
     // }
+
+    async getAverageClosingTimeByRecruiter() {
+        const averageClosingTimes = await VacancyModel.aggregate([
+            {
+                $group: {
+                    _id: "$createdBy",
+                    averageClosingTime: {
+                        $avg: {
+                            $subtract: ["$deadline", "$creationDate"] // Assuming you have a closedDate field
+                        }
+                    },
+                    totalVacancies: { $sum: 1 }
+                }
+            },
+            {
+                $match: { totalVacancies: { $gt: 0 } } // Only include recruiters with closed vacancies
+            }
+        ]);
+
+        return averageClosingTimes;
+    }
 }
