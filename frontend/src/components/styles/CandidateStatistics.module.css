@@ -1,0 +1,56 @@
+.container {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 60%;
+    margin-bottom: 1rem;
+}
+
+.monthSelector {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.monthDropdown {
+    margin-left: 10px;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    transition: border-color 0.3s;
+}
+
+.monthDropdown:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+.ratingTable {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.ratingTable th, .ratingTable td {
+    border: 1px solid #e5e5e5;
+    padding: 10px;
+    text-align: left;
+}
+
+.ratingTable th {
+    background-color: #f8f9fc;
+    color: #6772e5;
+}
+
+.ratingTable tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.ratingTable tr:hover {
+    background-color: #f1f1f1;
+}
+
+.graph{
+    /* border: 2px solid red; */
+    /* width: 50%; */
+}

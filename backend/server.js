@@ -15,6 +15,9 @@ import projectRouter from './features/project/project.router.js';
 import messageRouter from './features/message/message.router.js';
 import attendanceRouter from './features/attendance/attendance.router.js';
 import documentRouter from './features/document/document.router.js';
+import candidateRouter from './features/candidate/candidate.router.js';
+import dashboardRouter from './features/dashboard/dashboard.router.js'
+import vacancyRouter from './features/vacancy/vacancy.router.js';
 import { connectUsingMongoose } from './config/mongoose.js';
 import { authMiddleware } from './middlewares/auth.middleware.js';
 
@@ -45,6 +48,9 @@ app.use('/api/projects', authMiddleware, projectRouter);
 app.use('/api/messages', authMiddleware, messageRouter);
 app.use('/api/attendance', attendanceRouter);
 app.use('/api/documents', documentRouter);
+app.use('/api/candidates', candidateRouter);
+app.use('/api/hr-dashboard', dashboardRouter);
+app.use('/api/vacancies', vacancyRouter);
 
 app.use('/uploads', express.static(path.join(__dirname, 'public/uploads')));
 

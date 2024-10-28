@@ -16,6 +16,7 @@ import Settings from './pages/Settings';
 import PasswordChange from './components/PasswordChange';
 import Login2 from './pages/Login2.tsx';
 import NotFound from './components/NotFound.jsx';
+import HRDashboard from './pages/HRDashboard.jsx';
 
 function App() {
   return (
@@ -23,10 +24,11 @@ function App() {
       <Router>
       {/* <ToastContainer/> */}
         <Routes>
+          {/* <Route path='/auth' element = {<Login2/>} /> */}
+          <Route path='/auth' element = {<Login/>} />
           <Route path='/' element={<Dashboard/>} />
-          <Route path='/auth' element = {<Login2/>} />
-          {/* <Route path='/auth' element = {<Login/>} /> */}
           <Route path='/admin' element = {<AdminDashboard/>} />
+          <Route path='/hr' element = {<HRDashboard/>} />
           <Route path='/users' element = {<Users/>} />
           <Route path='/documents' element = {<Documents/>} />
           <Route path='/hierarchy' element = {<Hierarchy/>} />

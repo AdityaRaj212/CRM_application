@@ -1,0 +1,20 @@
+.progressBar {
+    background: #e0e0de;
+    border-radius: 50px;
+    margin: 20px 0;
+    height: 30px;
+    width: 100%;
+}
+
+.filler {
+    background: #6772e5;
+    border-radius: inherit;
+    text-align: right;
+    transition: width 0.5s;
+}
+
+.label {
+    padding: 5px;
+    color: white;
+    font-weight: bold;
+}
