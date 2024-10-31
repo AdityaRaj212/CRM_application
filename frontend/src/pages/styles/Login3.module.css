@@ -1,0 +1,101 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f5f5f5;
+}
+
+.wrapper {
+  display: flex;
+  width: 80%;
+  max-width: 1000px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.leftPanel {
+  flex: 1;
+  padding: 40px 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* background-color: #ffffff; */
+  background-color: #f9f9f9; 
+}
+
+.rightPanel {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* background-color: #f9f9f9;  */
+  background-color: white;
+  background-size: cover;
+}
+
+.image {
+  width: 80%; /* Adjust width to fit your design */
+  height: auto;
+}
+
+.title {
+  font-size: 2.5em;
+  color: #4a4a4a;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  font-size: 1em;
+  color: #7a7a7a;
+  margin-bottom: 30px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.input {
+  margin: 10px 0;
+  padding: 15px;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  font-size: 1em;
+}
+
+.submitButton {
+  padding: 15px;
+  border: none;
+  border-radius: 6px;
+  background-color: #6c63ff; /* Primary button color */
+  color: white;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.submitButton:hover {
+  background-color: #5a54d8; /* Darker shade for hover */
+}
+
+.authToggle {
+  margin: 15px 0;
+  font-size: 0.9em;
+  text-align: center;
+}
+
+.toggleLink {
+  color: #6c63ff;
+  cursor: pointer;
+}
+
+.googleAuth {
+  text-align: center;
+}
+
+.googleButton {
+  /* Google button styles */
+  margin-top: 10px;
+}

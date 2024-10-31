@@ -1,0 +1,48 @@
+.messageInput {
+    border-top: 1px solid #e0e0e0;
+    background-color: #ffffff;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.inputForm {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 10px;
+}
+
+.inputField {
+    flex: 1;
+    padding: 12px;
+    border-radius: 25px;
+    border: 1px solid #e0e0e0;
+    outline: none;
+    transition: all 0.3s;
+    font-size: 1rem;
+}
+
+.inputField:focus {
+    border-color: #4985F6;
+    box-shadow: 0 0 5px rgba(73, 133, 246, 0.5); /* Focus glow effect */
+}
+
+.sendButton {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 50%;
+    background-color: #4985F6;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.1s;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sendButton:hover {
+    background-color: #3669c9;
+    transform: scale(1.1); /* Scale effect on hover */
+}

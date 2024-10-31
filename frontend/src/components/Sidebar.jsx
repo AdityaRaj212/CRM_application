@@ -21,6 +21,8 @@ const Sidebar = ({activeComponent}) => {
       case 'dashboard':
         if(userPosition==='Employee'){
           navigate('/');
+        }else if(userPosition=='HR Admin'){
+          navigate('/hr');
         }else{
           navigate('/admin');
         }
@@ -30,12 +32,20 @@ const Sidebar = ({activeComponent}) => {
         navigate('/users');
         break;
 
+      case 'payroll':
+        navigate('/payroll');
+        break;
+
       case 'documents':
         navigate('/documents');
         break;
 
       case 'hierarchy':
         navigate('/hierarchy');
+        break;
+
+      case 'message':
+        navigate('/chat');
         break;
 
       case 'help':
@@ -82,6 +92,13 @@ const Sidebar = ({activeComponent}) => {
           <span className={styles.icon}>📄</span>
           <span className={styles.text}>Documents</span>
         </li>
+        <li
+          className={`${styles.menuItem} ${activeMenu === 'payroll' ? styles.active : ''}`}
+          onClick={() => handleMenuClick('payroll')}
+        >
+          <span className={styles.icon}>💵</span>
+          <span className={styles.text}>Payroll</span>
+        </li>
         <li className={styles.menuItem}>
           <span className={styles.icon}>🖼️</span>
           <span className={styles.text}>Photos</span>
@@ -97,7 +114,10 @@ const Sidebar = ({activeComponent}) => {
           <span className={styles.icon}>🗂️</span>
           <span className={styles.text}>Projects</span>
         </li>
-        <li className={styles.menuItem}>
+        <li
+          className={`${styles.menuItem} ${activeMenu === 'message' ? styles.active : ''}`}
+          onClick={() => handleMenuClick('message')}
+        >
           <span className={styles.icon}>💬</span>
           <span className={styles.text}>Message</span>
         </li>

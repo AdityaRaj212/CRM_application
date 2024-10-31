@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import styles from './styles/GreetingHeader.module.css';
 import { useAuth } from '../context/AuthContext';
 import { FaSignOutAlt } from 'react-icons/fa'; // Icon for logout
+import UserProfileCircle from './UserProfileCircle';
 
 const GreetingHeader = ({ username }) => {
   const { loading, user, logout } = useAuth();
@@ -21,11 +22,11 @@ const GreetingHeader = ({ username }) => {
   // Determine the greeting based on the time of day
   const getGreetingMessage = () => {
     if (currentHour < 12) {
-      return `Good Morning ${username},`;
+      return `Good Morning ${username}`;
     } else if (currentHour < 18) {
-      return `Good Afternoon ${username},`;
+      return `Good Afternoon ${username}`;
     } else {
-      return `Good Evening ${username},`;
+      return `Good Evening ${username}`;
     }
   };
 
@@ -63,9 +64,10 @@ const GreetingHeader = ({ username }) => {
         )}
       </div>
       <div className={styles.profileSection} onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
-        <div className={styles.profileAvatar}>
+        {/* <div className={styles.profileAvatar}>
           <img src="./../public/images/unknownUser.jpeg" alt="Profile Avatar" />
-        </div>
+        </div> */}
+        <UserProfileCircle user={user}/>
         <div className={styles.userInfo}>
           <p className={styles.username}>{username}</p>
           <p className={styles.position}>{position}</p>

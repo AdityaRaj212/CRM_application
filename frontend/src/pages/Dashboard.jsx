@@ -111,6 +111,7 @@ const Dashboard = () => {
 
           <div className={styles.mainSection}>
             <div className={styles.calendarSection}>
+              {/* {joiningDate && <Calendar2 userId={userId} joiningDate={joiningDate} />} */}
               {joiningDate && <Calendar userId={userId} joiningDate={joiningDate} />}
             </div>
             <div className={styles.rightSection}>

@@ -119,17 +119,22 @@ export default class VacancyController {
             const recruitersWithInfo = await Promise.all(
                 averageClosingTimes.map(async (vacancy) => {
                     const recruiter = await UserModel.findById(vacancy._id);
+                    const averageClosingTimeInDays = vacancy.averageClosingTime / (3600 * 24 * 1000);
+                    // Truncate to one decimal place
+                    const truncatedAverageClosingTime = Math.floor(averageClosingTimeInDays * 10) / 10;
+    
                     return {
                         recruiterId: vacancy._id,
                         recruiterInfo: recruiter,
-                        averageClosingTime: vacancy.averageClosingTime/(3600*24*1000)
+                        averageClosingTime: truncatedAverageClosingTime,
                     };
                 })
             );
-
+    
             res.status(200).json(recruitersWithInfo);
         } catch (error) {
             res.status(500).json({ message: error.message });
         }
     }
+    
 }
