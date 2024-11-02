@@ -51,7 +51,13 @@ const __dirname = path.dirname(__filename);
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors());
+// app.use(cors());
+app.use(cors({
+    origin: process.env.CORS_ORIGIN || '*', // Fallback to '*' if the environment variable is not set
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true // Required for cookies and credentials
+  }));
 // app.use(bodyParser.json());
 // app.use(cookieParser());
 app.use(session({
