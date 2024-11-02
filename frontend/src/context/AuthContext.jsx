@@ -75,7 +75,7 @@ export const AuthProvider = ({ children }) => {
         // Check if the user is logged in (e.g., check localStorage for token)
         const token = localStorage.getItem('token');
         if (token) {
-            axios.get('/api/users/me', {
+            axios.get(`${apiUrl}/api/users/me`, {
                 headers: { Authorization: `Bearer ${token}` }
             })
             .then(response => {
@@ -89,7 +89,7 @@ export const AuthProvider = ({ children }) => {
     }, []);
 
     const login = async (username, password) => {
-        const response = await axios.post('/api/login', { username, password });
+        const response = await axios.post(`${apiUrl}/api/login`, { username, password });
         localStorage.setItem('token', response.data.token);
         setUser(response.data.user);
     };
