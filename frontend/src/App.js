@@ -21,6 +21,30 @@ import Login3 from './pages/Login3.jsx';
 import ChatContainer from './pages/ChatContainer.jsx';
 import Payroll from './pages/Payroll.jsx';
 
+import {
+  Chart,
+  LineController,
+  LineElement,
+  PointElement,
+  LinearScale,
+  Title,
+  CategoryScale,
+  Tooltip,
+  Legend,
+} from 'chart.js';
+
+// Register the components globally
+Chart.register(
+  LineController,
+  LineElement,
+  PointElement,
+  LinearScale,
+  Title,
+  CategoryScale,
+  Tooltip,
+  Legend
+);
+
 function App() {
   return (
     <AuthProvider>
