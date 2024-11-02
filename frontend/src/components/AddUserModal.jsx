@@ -6,6 +6,8 @@ import axios from 'axios';
 import { ImCheckboxChecked, ImCheckboxUnchecked } from "react-icons/im";
 
 const AddUserModal = ({ isOpen, onRequestClose, user }) => {
+  const apiUrl = process.env.REACT_APP_API_BASE_URL;
+
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');

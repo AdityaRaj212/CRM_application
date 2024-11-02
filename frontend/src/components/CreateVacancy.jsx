@@ -8,6 +8,8 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const CreateVacancy = ({ onClose }) => {
+    const apiUrl = process.env.REACT_APP_API_BASE_URL;
+
     const {user} = useAuth();
     const [role, setRole] = useState('');
     const [deadline, setDeadline] = useState('');

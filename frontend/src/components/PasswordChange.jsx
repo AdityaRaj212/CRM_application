@@ -6,6 +6,8 @@ import { FaLock } from 'react-icons/fa';
 import axios from 'axios';
 
 const PasswordChange = () => {
+    const apiUrl = process.env.REACT_APP_API_BASE_URL;
+
     const [currentPassword, setCurrentPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');

@@ -15,6 +15,8 @@ import LoginPage from './Login';
 import Loading from '../components/Loading';
 
 const AdminDashboard = () => {
+  const apiUrl = process.env.REACT_APP_API_BASE_URL;
+
   const {loading, user} = useAuth();
   const [users, setUsers] = useState([]);
   const [userName, setUserName] = useState('User');

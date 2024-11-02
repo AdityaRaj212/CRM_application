@@ -30,6 +30,8 @@ Chart.register(
 );
 
 const CandidateStatistics = () => {
+    const apiUrl = process.env.REACT_APP_API_BASE_URL;
+
     const [candidates, setCandidates] = useState([]);
     const [month, setMonth] = useState(new Date()); // State to manage the selected month
     const chartRef = useRef(); // Reference to the chart instance

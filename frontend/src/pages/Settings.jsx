@@ -12,6 +12,8 @@ import axios from 'axios';
 import PasswordChangeModal from '../modals/PasswordChangeModal';
 
 const Settings = () => {
+    const apiUrl = process.env.REACT_APP_API_BASE_URL;
+
     const {user, loading} = useAuth();
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');

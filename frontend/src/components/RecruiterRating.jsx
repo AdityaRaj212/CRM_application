@@ -7,6 +7,8 @@ import PulseLoader from 'react-spinners/PulseLoader'; // Import PulseLoader from
 import UserProfileCircle from './UserProfileCircle';
 
 const RecruiterRating = () => {
+    const apiUrl = process.env.REACT_APP_API_BASE_URL;
+
     const { loading } = useAuth();
     const [loading2, setLoading2] = useState(true);
     const [ratings, setRatings] = useState([]);

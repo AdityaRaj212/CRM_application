@@ -16,6 +16,8 @@ const socket = io(process.env.REACT_APP_SOCKET_URL || 'http://localhost:5000');
 
 
 const ChatContainer = () => {
+    const apiUrl = process.env.REACT_APP_API_BASE_URL;
+
     const { user, loading } = useAuth();
     const [activeChat, setActiveChat] = useState(null);
     const [messages, setMessages] = useState([]);

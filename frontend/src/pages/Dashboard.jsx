@@ -26,6 +26,8 @@ const thoughtsList = [
 ];
 
 const Dashboard = () => {
+  const apiUrl = process.env.REACT_APP_API_BASE_URL;
+
   const {user, login, logout, loading} = useAuth();
   const navigate = useNavigate();
   const [userName, setUserName] = useState('User');

@@ -8,6 +8,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import styles from './styles/TaskSection.module.css';
 
 const TaskSection = ({ userId }) => {
+  const apiUrl = process.env.REACT_APP_API_BASE_URL;
+
   const [tasks, setTasks] = useState({ todo: [], inProgress: [], done: [] });
   const [users, setUsers] = useState([]);
   const [selectedTask, setSelectedTask] = useState(null);

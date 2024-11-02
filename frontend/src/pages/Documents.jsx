@@ -18,6 +18,8 @@ import LoginPage from './Login';
 import Loading from '../components/Loading';
 
 const Documents = () => {
+    const apiUrl = process.env.REACT_APP_API_BASE_URL;
+
     const {loading, user} = useAuth();
     const [documents, setDocuments] = useState([]);
     const [loading2, setLoading2] = useState(true);

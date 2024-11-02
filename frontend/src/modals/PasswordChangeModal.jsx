@@ -6,6 +6,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 
 const PasswordChangeModal = ({ closeModal }) => {
+    const apiUrl = process.env.REACT_APP_API_BASE_URL;
+
     const [currentPassword, setCurrentPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');

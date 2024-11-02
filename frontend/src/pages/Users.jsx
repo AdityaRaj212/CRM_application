@@ -15,6 +15,8 @@ import { useAuth } from '../context/AuthContext';
 import Loading from '../components/Loading';
 
 const Users = () => {
+  const apiUrl = process.env.REACT_APP_API_BASE_URL;
+
   const {user, loading} = useAuth();
   const [users, setUsers] = useState([]);
   const [userName, setUserName] = useState('User');

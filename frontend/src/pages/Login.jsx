@@ -5,7 +5,10 @@ import 'react-toastify/dist/ReactToastify.css';
 import styles from './styles/Login3.module.css';
 import loginImage from './../images/loginImage.png'; 
 
+
 const LoginPage = () => {
+    const apiUrl = process.env.REACT_APP_API_BASE_URL;
+    
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [name, setName] = useState('');
@@ -30,7 +33,9 @@ const LoginPage = () => {
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
-            const res = await axios.post('/api/users/login', { email, password });
+            console.log('api: ', apiUrl);
+            const res = await axios.post(`${apiUrl}/api/users/login`, { email, password });
+            // const res = await axios.post('/api/users/login', { email, password });
             localStorage.setItem('token', res.data.token);
             localStorage.setItem('userId', res.data.userId);
             window.location.href = '/';

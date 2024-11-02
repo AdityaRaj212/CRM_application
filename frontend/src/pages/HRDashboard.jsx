@@ -19,6 +19,8 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const HRDashboard = () => {
+    const apiUrl = process.env.REACT_APP_API_BASE_URL;
+
     const { user, loading } = useAuth();
     const [totalResponses, setTotalResponses] = useState(0);
     const [responsesToday, setResponsesToday] = useState(0);

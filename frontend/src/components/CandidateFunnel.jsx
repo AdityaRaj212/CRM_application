@@ -3,6 +3,8 @@ import axios from 'axios';
 import styles from './styles/CandidateFunnel.module.css'; 
 
 const CandidateFunnel = () => {
+    const apiUrl = process.env.REACT_APP_API_BASE_URL;
+
     const [totalCandidates, setTotalCandidates] = useState(100);
     const [loading, setLoading] = useState(true);
     const [funnelData, setFunnelData] = useState([]);

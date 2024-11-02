@@ -4,6 +4,8 @@ import styles from './styles/AverageVacancyClosingTime.module.css';
 import UserProfileCircle from './UserProfileCircle';
 
 const AverageVacancyClosingTime = () => {
+    const apiUrl = process.env.REACT_APP_API_BASE_URL;
+
     const [loading, setLoading] = useState(true);
     const [data, setData] = useState([]);
 

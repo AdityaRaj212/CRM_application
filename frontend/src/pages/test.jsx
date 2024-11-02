@@ -13,6 +13,8 @@ import { ToastContainer } from 'react-toastify';
 import Loading from '../components/Loading';
 
 const AdminDashboard = () => {
+  const apiUrl = process.env.REACT_APP_API_BASE_URL;
+
   const [users, setUsers] = useState([]);
   const [userName, setUserName] = useState('User');
   const [loading, setLoading] = useState(true);

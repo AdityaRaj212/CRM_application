@@ -6,6 +6,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 
 const Calendar = ({ userId, joiningDate }) => {
+  const apiUrl = process.env.REACT_APP_API_BASE_URL;
+
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [attendance, setAttendance] = useState([]);
 

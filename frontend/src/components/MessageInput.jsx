@@ -5,6 +5,8 @@ import { useAuth } from '../context/AuthContext';
 import Loading from './Loading';
 
 const MessageInput = ({ activeChat, onSendMessage }) => {
+    const apiUrl = process.env.REACT_APP_API_BASE_URL;
+
     const [message, setMessage] = useState('');
     const {user, loading} = useAuth();
 

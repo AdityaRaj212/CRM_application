@@ -3,6 +3,8 @@ import axios from 'axios';
 import styles from './styles/VacancyClosingTime.module.css';
 
 const VacancyClosingTime = () => {
+    const apiUrl = process.env.REACT_APP_API_BASE_URL;
+
     const [vacancies, setVacancies] = useState([]);
     const [loading, setLoading] = useState(true);
     const [currentPage, setCurrentPage] = useState(1);
