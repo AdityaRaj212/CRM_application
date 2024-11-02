@@ -37,7 +37,7 @@ const HRDashboard = () => {
 
     const fetchDashboardData = async () => {
         try {
-            const response = await axios.get('/api/vacancies/'); // Fetch HR dashboard data
+            const response = await axios.get(`${apiUrl}/api/vacancies/`); // Fetch HR dashboard data
             const data = response.data;
 
             const candidatesResponse = await axios.get('/api/candidates/');

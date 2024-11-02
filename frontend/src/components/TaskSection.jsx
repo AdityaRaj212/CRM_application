@@ -31,7 +31,7 @@ const TaskSection = ({ userId }) => {
     const fetchTasks = async () => {
       if (userId) {
         try {
-          const response = await axios.get(`/api/tasks/get-task-assigned-to-user/${userId}`);
+          const response = await axios.get(`${apiUrl}/api/tasks/get-task-assigned-to-user/${userId}`);
           const fetchedTasks = response.data.tasks;
 
           const todo = fetchedTasks.filter(task => task.status === 'To-Do');
@@ -47,7 +47,7 @@ const TaskSection = ({ userId }) => {
 
     const fetchUsers = async () => {
       try {
-        const response = await axios.get(`/api/users/`);
+        const response = await axios.get(`${apiUrl}/api/users/`);
         setUsers(response.data.users);
       } catch (err) {
         console.error('Error while fetching users:', err);
@@ -176,7 +176,7 @@ const TaskSection = ({ userId }) => {
     fileUploadFormData.append('description', description);
 
     try {
-      const response = await axios.post('/api/tasks/add', formData, {
+      const response = await axios.post(`${apiUrl}/api/tasks/add`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         }
@@ -204,7 +204,7 @@ const TaskSection = ({ userId }) => {
 
   const handleDeleteTask = async (taskId, category) => {
     try {
-      const response = await axios.delete(`/api/tasks/delete/${taskId}`);
+      const response = await axios.delete(`${apiUrl}/api/tasks/delete/${taskId}`);
   
       console.log(response);
 
@@ -243,7 +243,7 @@ const TaskSection = ({ userId }) => {
     const updatedTask = { ...selectedTask, checkpoints: updatedCheckpoints, status: updatedStatus };
 
     try {
-      await axios.put(`/api/tasks/update/${selectedTask._id}`, updatedTask);
+      await axios.put(`${apiUrl}/api/tasks/update/${selectedTask._id}`, updatedTask);
       setSelectedTask(updatedTask); // Update the state with the new task
 
       // Update tasks in the relevant section without fetching again

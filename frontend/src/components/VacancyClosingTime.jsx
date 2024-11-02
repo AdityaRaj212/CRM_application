@@ -13,7 +13,7 @@ const VacancyClosingTime = () => {
     useEffect(() => {
         const fetchVacancies = async () => {
             try {
-                const response = await axios.get('/api/vacancies/');
+                const response = await axios.get(`${apiUrl}/api/vacancies/`);
                 const filteredVacancies = response.data.filter(vacancy => 
                     new Date(vacancy.deadline) >= new Date() // Filter for upcoming deadlines
                 );

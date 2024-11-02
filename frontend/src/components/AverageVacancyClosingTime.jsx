@@ -12,7 +12,7 @@ const AverageVacancyClosingTime = () => {
     useEffect(() => {
         const fetchAverageClosingTime = async () => {
             try {
-                const response = await axios.get('/api/vacancies/average-closing-time');
+                const response = await axios.get(`${apiUrl}/api/vacancies/average-closing-time`);
                 setData(response.data);
             } catch (error) {
                 console.error('Error fetching average closing times:', error);

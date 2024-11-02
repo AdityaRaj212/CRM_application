@@ -37,7 +37,7 @@ const Users = () => {
         if(user){
           setUserName(user.firstName);
         }
-        const response = await axios.get('/api/users'); // Adjust this endpoint
+        const response = await axios.get(`${apiUrl}/api/users`); // Adjust this endpoint
         setUsers(response.data.users); // Set users from API response
         setFilteredUsers(response.data.users); // Initialize filtered users
       } catch (err) {
@@ -125,7 +125,7 @@ const Users = () => {
 
   const handleDeleteUser = async (userId) => {
     try {
-      await axios.delete(`/api/users/${userId}`);
+      await axios.delete(`${apiUrl}/api/users/${userId}`);
       toast.success('User deleted successfully');
       setUsers(users.filter(user => user._id !== userId)); // Remove the user from the local state
     } catch (error) {

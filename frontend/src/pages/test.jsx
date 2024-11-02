@@ -27,7 +27,7 @@ const AdminDashboard = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await axios.get('/api/users'); // Modify the endpoint accordingly
+        const response = await axios.get(`${apiUrl}/api/users`); // Modify the endpoint accordingly
         setUsers(response.data.users); // Adjust according to your API response structure
         setFilteredUsers(response.data.users); // Initialize filtered users
       } catch (error) {
@@ -101,7 +101,7 @@ const AdminDashboard = () => {
   const handleDeleteUser = async (userId) => {
     try {
       console.log(userId);
-      await axios.delete(`/api/users/${userId}`); // Make sure the endpoint is correct
+      await axios.delete(`${apiUrl}/api/users/${userId}`); // Make sure the endpoint is correct
       toast.success('User deleted successfully')
       setFilteredUsers(filteredUsers.filter(user => user._id !== userId)); // Remove the user from the local state
     } catch (error) {

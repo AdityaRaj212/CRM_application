@@ -32,7 +32,7 @@ const LoginPage = () => {
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
-            const res = await axios.post('/api/users/login', { email, password });
+            const res = await axios.post(`${apiUrl}/api/users/login`, { email, password });
             localStorage.setItem('token', res.data.token);
             localStorage.setItem('userId', res.data.userId);
             window.location.href = '/';
@@ -44,7 +44,7 @@ const LoginPage = () => {
     const handleSignup = async (e) => {
         e.preventDefault();
         try {
-            const res = await axios.post('/api/users/signup', { name, email, password });
+            const res = await axios.post(`${apiUrl}/api/users/signup`, { name, email, password });
             localStorage.setItem('token', res.data.token);
             setIsSignup(false);
         } catch (error) {

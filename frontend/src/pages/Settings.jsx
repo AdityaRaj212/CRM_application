@@ -71,7 +71,7 @@ const Settings = () => {
         }
 
         try {
-            await axios.put(`/api/users/${user._id}`, formData, {
+            await axios.put(`${apiUrl}/api/users/${user._id}`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },

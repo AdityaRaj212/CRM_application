@@ -65,8 +65,8 @@ const AddUserModal = ({ isOpen, onRequestClose, user }) => {
       };
 
       const response = user
-        ? await axios.put(`/api/users/${user._id}`, updatedUser) // Update request
-        : await axios.post('/api/users/signup', updatedUser); // Create request
+        ? await axios.put(`${apiUrl}/api/users/${user._id}`, updatedUser) // Update request
+        : await axios.post(`${apiUrl}/api/users/signup`, updatedUser); // Create request
 
       if (response.data.status) {
         toast.success(user ? "User updated successfully" : "User created successfully");

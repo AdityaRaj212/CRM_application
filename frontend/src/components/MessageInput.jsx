@@ -16,7 +16,7 @@ const MessageInput = ({ activeChat, onSendMessage }) => {
         if (!message.trim() || !activeChat) return;
 
         try {
-            await axios.post('/api/messages/add', {
+            await axios.post(`${apiUrl}/api/messages/add`, {
                 from: user._id,  
                 to: activeChat._id,
                 content: message,

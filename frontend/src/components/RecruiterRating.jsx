@@ -22,7 +22,7 @@ const RecruiterRating = () => {
 
     const fetchUsers = async () => {
         try {
-            const response = await axios.get('/api/users/');
+            const response = await axios.get(`${apiUrl}/api/users/`);
             const allUsers = response.data.users;
             setUsers(allUsers);
 
@@ -40,7 +40,7 @@ const RecruiterRating = () => {
     const fetchRecruiterRatings = async (hrArray) => {
         try {
             const promises = hrArray.map(async (hr) => {
-                const vacancyResponse = await axios.get(`/api/vacancies/user/${hr._id}`);
+                const vacancyResponse = await axios.get(`${apiUrl}/api/vacancies/user/${hr._id}`);
                 const vacancies = vacancyResponse.data;
                 return {
                     id: hr._id,

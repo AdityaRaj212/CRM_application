@@ -48,7 +48,7 @@ const ChatContainer = () => {
 
     const fetchMessages = async (userId) => {
         try {
-            const response = await axios.get(`/api/messages/between/${user._id}/${userId}`);
+            const response = await axios.get(`${apiUrl}/api/messages/between/${user._id}/${userId}`);
             setMessages(response.data.messages);
             console.log(response.data.messages);
         } catch (error) {

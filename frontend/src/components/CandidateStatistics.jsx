@@ -52,7 +52,7 @@ const CandidateStatistics = () => {
 
     const fetchAllCandidates = async () => {
         try {
-            const response = await axios.get('/api/candidates/');
+            const response = await axios.get(`${apiUrl}/api/candidates/`);
             setCandidates(response.data);
         } catch (err) {
             console.error('Error while fetching all candidates: ', err);

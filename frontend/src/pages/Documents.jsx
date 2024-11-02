@@ -57,7 +57,7 @@ const Documents = () => {
 
     const fetchDocuments = async () => {
         try {
-            const response = await axios.get('/api/documents');
+            const response = await axios.get(`${apiUrl}/api/documents`);
             setDocuments(response.data);
             setFilteredDocuments(response.data); 
         } catch (error) {
@@ -206,7 +206,7 @@ const Documents = () => {
         formData.append('description', description);
 
         try {
-            await axios.put(`/api/documents/${currentDocument._id}`, formData, {
+            await axios.put(`${apiUrl}/api/documents/${currentDocument._id}`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
@@ -228,7 +228,7 @@ const Documents = () => {
 
     const handleDeleteDocument = async (documentId) => {
         try {
-            await axios.delete(`/api/documents/${documentId}`);
+            await axios.delete(`${apiUrl}/api/documents/${documentId}`);
             setDocuments(documents.filter(doc => doc._id !== documentId));
             toast.success('Document deleted successfully!');
         } catch (error) {
@@ -251,7 +251,7 @@ const Documents = () => {
       }
 
         try {
-            await axios.post('/api/documents/upload', formData, {
+            await axios.post(`${apiUrl}/api/documents/upload`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
@@ -289,7 +289,7 @@ const Documents = () => {
 
     const handleDownloadDocument = async (documentId) => {
       try {
-          const response = await axios.get(`/api/documents/download/${documentId}`, {
+          const response = await axios.get(`${apiUrl}/api/documents/download/${documentId}`, {
               responseType: 'blob', // Important for binary files
           });
           const url = window.URL.createObjectURL(new Blob([response.data]));
@@ -324,7 +324,7 @@ const Documents = () => {
 
 const handlePreviewDocument = async (documentId) => {
     try {
-        const response = await axios.get(`/api/documents/preview/${documentId}`, {
+        const response = await axios.get(`${apiUrl}/api/documents/preview/${documentId}`, {
             responseType: 'blob', // Important for binary files
         });
 

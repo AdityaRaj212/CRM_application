@@ -47,7 +47,7 @@ const LoginPage = () => {
     const handleSignup = async (e) => {
         e.preventDefault();
         try {
-            const res = await axios.post('/api/users/signup', { name, email, password });
+            const res = await axios.post(`${apiUrl}/api/users/signup`, { name, email, password });
             localStorage.setItem('token', res.data.token);
             setIsSignup(false);
         } catch (error) {

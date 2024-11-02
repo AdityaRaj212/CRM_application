@@ -23,7 +23,7 @@ const Calendar = ({ userId, joiningDate }) => {
     const today = format(new Date(), 'yyyy-MM-dd');
     if (!attendance.includes(today)) {
       try {
-        const response = await axios.post('/api/attendance/', { userId, date: today });
+        const response = await axios.post(`${apiUrl}/api/attendance/`, { userId, date: today });
         setAttendance((prev) => [...prev, response.data.date]);
         toast.success('Attendance marked successfully');
       } catch (err) {
@@ -37,7 +37,7 @@ const Calendar = ({ userId, joiningDate }) => {
   useEffect(() => {
     const fetchAttendance = async () => {
       try {
-        const response = await axios.get(`/api/attendance/${userId}`);
+        const response = await axios.get(`${apiUrl}/api/attendance/${userId}`);
         setAttendance(response.data.attendedDates);
       } catch (err) {
         console.error(err);

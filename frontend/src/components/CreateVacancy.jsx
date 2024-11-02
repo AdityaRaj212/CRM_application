@@ -18,7 +18,7 @@ const CreateVacancy = ({ onClose }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('/api/vacancies/', {
+            await axios.post(`${apiUrl}/api/vacancies/`, {
                 createdBy: user._id,
                 role,
                 deadline,

@@ -12,7 +12,7 @@ const CandidateFunnel = () => {
     useEffect(() => {
         const fetchFunnelData = async () => {
             try {
-                const response = await axios.get('/api/candidates/status-counts'); // Fetch data from backend
+                const response = await axios.get(`${apiUrl}/api/candidates/status-counts`); // Fetch data from backend
                 const { statusCounts, statusPercentages } = response.data;
                 setTotalCandidates(response.data.totalCandidates);
 

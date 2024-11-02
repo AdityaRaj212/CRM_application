@@ -39,7 +39,7 @@ const AdminDashboard = () => {
     useEffect(() => {
       const fetchDetails = async () => {
         try {             
-          const response = await axios.get('/api/users'); 
+          const response = await axios.get(`${apiUrl}/api/users`); 
           setUsers(response.data.users); 
           setFilteredUsers(response.data.users); 
         } catch (err) {
@@ -123,7 +123,7 @@ const AdminDashboard = () => {
 
   const handleDeleteUser = async (userId) => {
     try {
-      await axios.delete(`/api/users/${userId}`);
+      await axios.delete(`${apiUrl}/api/users/${userId}`);
       toast.success('User deleted successfully');
       setUsers(users.filter(user => user._id !== userId)); 
     } catch (error) {
