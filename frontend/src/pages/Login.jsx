@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { GoogleLogin } from 'react-google-login';
 import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -12,21 +11,21 @@ const LoginPage = () => {
     const [name, setName] = useState('');
     const [isSignup, setIsSignup] = useState(false);
 
-    const handleGoogleSuccess = async (response) => {
-        const tokenId = response.tokenId;
-        try {
-            const res = await axios.post('/api/users/oauth/google', { tokenId });
-            localStorage.setItem('token', res.data.token);
-            localStorage.setItem('userId', res.data.userId);
-            window.location.href = '/dashboard';
-        } catch (error) {
-            toast.error('Google login failed. Please try again.');
-        }
-    };
+    // const handleGoogleSuccess = async (response) => {
+    //     const tokenId = response.tokenId;
+    //     try {
+    //         const res = await axios.post('/api/users/oauth/google', { tokenId });
+    //         localStorage.setItem('token', res.data.token);
+    //         localStorage.setItem('userId', res.data.userId);
+    //         window.location.href = '/dashboard';
+    //     } catch (error) {
+    //         toast.error('Google login failed. Please try again.');
+    //     }
+    // };
 
-    const handleGoogleFailure = (response) => {
-        toast.error('Google login failed. Please try again.');
-    };
+    // const handleGoogleFailure = (response) => {
+    //     toast.error('Google login failed. Please try again.');
+    // };
 
     const handleLogin = async (e) => {
         e.preventDefault();
