@@ -23,7 +23,7 @@ const ChatList = ({ onSelectChat }) => {
             {users.map(user => (
                 <li key={user._id} className={styles.chatListItem} onClick={() => onSelectChat(user)}>
                     <span className={styles.userName}>{user.firstName} {user.lastName}</span>
-                    <span className={styles.userStatus}>Active</span>
+                    <span className={styles.userStatus}>{user.email}</span>
                 </li>
             ))}
         </ul>

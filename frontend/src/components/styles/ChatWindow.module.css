@@ -3,6 +3,7 @@
     display: flex;
     flex-direction: column;
     background-color: #fff;
+    overflow: scroll;
 }
 
 .header {
@@ -25,30 +26,63 @@
     margin: 10px 0;
     display: flex;
     align-items: flex-start;
-    flex-direction: row;
+    width: 100%; /* Ensures the message takes the full width */
+}
+
+.sent {
+    justify-content: flex-end; /* Aligns sent messages to the right */
+}
+
+.received {
+    justify-content: flex-start; /* Aligns received messages to the left */
 }
 
 .messageContent {
     max-width: 70%;
     padding: 10px;
     border-radius: 10px;
-    margin-left: 10px;
+    position: relative; /* Allows time to be positioned relative to this container */
 }
 
 .sent .messageContent {
     background-color: #e1ffc7;
-    align-self: flex-end;
-    /* justify-content: flex-end; */
+    margin-left: auto; /* Keeps the sent message aligned right */
 }
 
 .received .messageContent {
     background-color: #f1f0f0;
-    /* border: 2px solid red; */
-
+    margin-right: auto; /* Keeps the received message aligned left */
 }
 
 .time {
     font-size: 12px;
     color: #999;
-    margin-left: 5px;
+    margin-top: 5px;
+    display: inline-block;
+    margin: 0 10px;
+}
+
+.sent .time {
+    float: left; /* Aligns time to the left of the message content for sent messages */
+}
+
+.dateDivider {
+    text-align: center;
+    margin: 10px 0;
+    font-size: 14px;
+    color: #666;
+}
+
+.noMessages {
+    text-align: center;
+    color: #888;
+    font-size: 16px;
+    margin-top: 20px;
+}
+
+.loadingMessage {
+    text-align: center;
+    color: #666;
+    font-size: 16px;
+    margin-top: 20px;
 }

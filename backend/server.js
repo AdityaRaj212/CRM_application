@@ -1,4 +1,6 @@
 import dotenv from 'dotenv';
+dotenv.config();
+
 import express from 'express';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
@@ -25,12 +27,21 @@ dotenv.config();
 const app = express();
 const server = http.createServer(app); // Create server using http
 // const io = new Server(server); // Initialize Socket.IO
+// const io = new Server(server, {
+//     cors: {
+//         origin: 'http://localhost:3000', // Your frontend URL
+//         methods: ['GET', 'POST'],
+//         credentials: true // Allow credentials
+//     }
+// });
+
+
 const io = new Server(server, {
     cors: {
-        origin: 'http://localhost:3000', // Your frontend URL
+        origin: process.env.CORS_ORIGIN || 'http://localhost:3000',
         methods: ['GET', 'POST'],
-        credentials: true // Allow credentials
-    }
+        credentials: true,
+    },
 });
 
 // Get the current file's directory (equivalent to __dirname in CommonJS)
@@ -68,13 +79,29 @@ app.use('/uploads', express.static(path.join(__dirname, 'public/uploads')));
 io.on('connection', (socket) => {
     console.log('New user connected:', socket.id);
 
-    // Listen for messages
+    // Store user socket connections (you may want a more robust solution in production)
+    socket.on('registerUser', (userId) => {
+        socket.userId = userId;
+        console.log(`User ${userId} registered with socket ID: ${socket.id}`);
+    });
+
+    // Listen for sendMessage event and emit to the recipient
     socket.on('sendMessage', async (data) => {
-        // Save message to the database if necessary
+        console.log('Message received:', data);
+
+        // Optionally save the message to the database here
         // Example: await messageRepository.addMessage(data.from, data.to, data.content);
 
-        // Emit message to the intended recipient
-        socket.to(data.to).emit('receiveMessage', data);
+        // Emit message to the recipient if they are connected
+        for (let [id, connectedSocket] of io.sockets.sockets) {
+            if (connectedSocket.userId === data.to) {
+                connectedSocket.emit('receiveMessage', data);
+                break;
+            }
+        }
+
+        // Emit the message back to the sender
+        socket.emit('receiveMessage', data);
     });
 
     // Handle disconnection
@@ -82,6 +109,26 @@ io.on('connection', (socket) => {
         console.log('User disconnected:', socket.id);
     });
 });
+
+
+// // Socket.IO connection
+// io.on('connection', (socket) => {
+//     console.log('New user connected:', socket.id);
+
+//     // Listen for messages
+//     socket.on('sendMessage', async (data) => {
+//         // Save message to the database if necessary
+//         // Example: await messageRepository.addMessage(data.from, data.to, data.content);
+
+//         // Emit message to the intended recipient
+//         socket.to(data.to).emit('receiveMessage', data);
+//     });
+
+//     // Handle disconnection
+//     socket.on('disconnect', () => {
+//         console.log('User disconnected:', socket.id);
+//     });
+// });
 
 // Start Server
 const PORT = process.env.PORT || 5000;

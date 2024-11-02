@@ -4,7 +4,7 @@ import styles from './styles/MessageInput.module.css';
 import { useAuth } from '../context/AuthContext';
 import Loading from './Loading';
 
-const MessageInput = ({ activeChat }) => {
+const MessageInput = ({ activeChat, onSendMessage }) => {
     const [message, setMessage] = useState('');
     const {user, loading} = useAuth();
 
@@ -15,12 +15,12 @@ const MessageInput = ({ activeChat }) => {
 
         try {
             await axios.post('/api/messages/add', {
-                from: activeChat._id,  // Assuming activeChat has _id
-                to: user._id, // Replace with the actual user's ID you're messaging
+                from: user._id,  
+                to: activeChat._id,
                 content: message,
             });
+            onSendMessage(message);
             setMessage('');
-            // Optionally refresh messages after sending
         } catch (error) {
             console.error('Error sending message:', error);
         }
