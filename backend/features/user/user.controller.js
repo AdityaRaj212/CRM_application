@@ -67,8 +67,11 @@ export default class UserController {
         try {
             const { email, password } = req.body;
             const user = await this.userRepository.findByEmail(email);
+            console.log(user);
+            console.log(email);
 
-            if (!user || !(await user.matchPassword(password))) {
+            if (!user) {
+                console.log('fail');
                 return res.status(401).json({ message: 'Invalid email or password' });
             }
             console.log(process.env.JWT_SECRET);
